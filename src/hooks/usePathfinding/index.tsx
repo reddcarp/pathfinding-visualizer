@@ -3,20 +3,19 @@ import { CoordType, NodeStateType, NodeType } from "../../interfaces";
 import { constructNodesArray } from "./helper";
 
 const usePathfinding = (rows: number, columns: number) => {
-  const [startNode, setStartNode]: [NodeType, any] = useState({
+  const [startNode, setStartNode] = useState<NodeType>({
     coord: { row: 0, column: 0 },
     state: "start",
   });
-  const [goalNode, setGoalNode]: [NodeType, any] = useState({
+  const [goalNode, setGoalNode] = useState<NodeType>({
     coord: { row: 0, column: columns - 1 },
     state: "goal",
   });
-  const [nodes, setNodes] = useState(
+  const [nodes, setNodes] = useState<NodeType[][]>(
     constructNodesArray(rows, columns, startNode, goalNode)
   );
 
-  const [selectedState, setSlectedState]: [NodeStateType, any] =
-    useState("start");
+  const [selectedState, setSlectedState] = useState<NodeStateType>("start");
 
   const handleSelectedStateChange = (state: NodeStateType) => {
     setSlectedState(state);
@@ -54,7 +53,7 @@ const usePathfinding = (rows: number, columns: number) => {
     });
   };
 
-  return { handleNodeChange, nodes, handleSelectedStateChange };
+  return { handleNodeChange, nodes, handleSelectedStateChange, selectedState };
 };
 
 export default usePathfinding;

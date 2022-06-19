@@ -3,11 +3,10 @@ import { NodeStateType } from "../../interfaces";
 
 interface StateSelectorProps {
   handleSelectedStateChange: (state: NodeStateType) => void;
-}
-
-interface StateSelectorState {
   selectedState: NodeStateType;
 }
+
+interface StateSelectorState {}
 
 class StateSelector extends React.PureComponent<
   StateSelectorProps,
@@ -15,19 +14,16 @@ class StateSelector extends React.PureComponent<
 > {
   constructor(props: StateSelectorProps) {
     super(props);
-
-    this.state = {
-      selectedState: "start",
-    };
   }
 
   render() {
+    console.log("rendered");
     return (
       <div id="state-selector-container">
         <div
           id="state-toggle"
           toggle-state={
-            this.state.selectedState === "start" ? "toggled" : "none"
+            this.props.selectedState === "start" ? "toggled" : "none"
           }
           onClick={() => {
             this.setState({ selectedState: "start" });
@@ -39,7 +35,7 @@ class StateSelector extends React.PureComponent<
         <div
           id="state-toggle"
           toggle-state={
-            this.state.selectedState === "goal" ? "toggled" : "none"
+            this.props.selectedState === "goal" ? "toggled" : "none"
           }
           onClick={() => {
             this.setState({ selectedState: "goal" });
