@@ -13,10 +13,6 @@ class StateSelector extends React.PureComponent<
   StateSelectorProps,
   StateSelectorState
 > {
-  constructor(props: StateSelectorProps) {
-    super(props);
-  }
-
   render() {
     return (
       <div id="state-selector-container">

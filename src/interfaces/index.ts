@@ -10,4 +10,6 @@ interface NodeType {
   coord: CoordType;
 }
 
-export type { NodeStateType, NodeType, CoordType };
+type PathfindingType = "BFS" | "Dijkstra" | "A*" | "DFS";
+
+export type { NodeStateType, NodeType, CoordType, PathfindingType };

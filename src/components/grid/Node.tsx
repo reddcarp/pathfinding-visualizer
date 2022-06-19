@@ -9,10 +9,6 @@ interface NodeProps {
 interface NodeState {}
 
 class Node extends React.Component<NodeProps, NodeState> {
-  constructor(props: NodeProps) {
-    super(props);
-  }
-
   handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     this.props.handleNodeChange(this.props.node.coord);
   };

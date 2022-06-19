@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { CoordType, NodeStateType, NodeType } from "../../interfaces";
+import { dijkstra } from "../../components/algorithms/dijkstra";
+import {
+  CoordType,
+  NodeStateType,
+  NodeType,
+  PathfindingType,
+} from "../../interfaces";
 import { constructNodesArray } from "./helper";
 
 const usePathfinding = (rows: number, columns: number) => {
@@ -53,7 +59,27 @@ const usePathfinding = (rows: number, columns: number) => {
     });
   };
 
-  return { handleNodeChange, nodes, handleSelectedStateChange, selectedState };
+  const animateDijkstra = (visitedNodesInOrder: NodeType[]) => {};
+
+  const handlePathfindingVisualization = (algo: PathfindingType) => {
+    console.log("visualizing + " + algo);
+    switch (algo) {
+      case "Dijkstra":
+        const visitedNodesInOrder = dijkstra();
+        animateDijkstra(visitedNodesInOrder);
+        break;
+      default:
+        break;
+    }
+  };
+
+  return {
+    handleNodeChange,
+    nodes,
+    handleSelectedStateChange,
+    selectedState,
+    handlePathfindingVisualization,
+  };
 };
 
 export default usePathfinding;

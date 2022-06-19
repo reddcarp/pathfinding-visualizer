@@ -1,5 +1,5 @@
 import React from "react";
-import { CoordType, NodeStateType, NodeType } from "../../interfaces";
+import { NodeStateType } from "../../interfaces";
 
 interface OptionProps {
   selectedState: NodeStateType;
@@ -11,10 +11,6 @@ interface OptionProps {
 interface OptionState {}
 
 class Option extends React.PureComponent<OptionProps, OptionState> {
-  constructor(props: OptionProps) {
-    super(props);
-  }
-
   render() {
     return (
       <div
