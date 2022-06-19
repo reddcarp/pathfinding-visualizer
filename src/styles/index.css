@@ -53,9 +53,11 @@ code {
 }
 #node[state-type="start"] {
   background-color: green;
+  cursor: default;
 }
 #node[state-type="goal"] {
   background-color: purple;
+  cursor: default;
 }
 
 /******* State Selector *********/

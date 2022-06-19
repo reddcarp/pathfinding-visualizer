@@ -24,13 +24,7 @@ const usePathfinding = (rows: number, columns: number) => {
 
   const handleNodeChange = (coord: CoordType) => {
     setNodes((prev) => {
-      console.log(
-        "handleNodeChange called from " + coord.row + "," + coord.column
-      );
       let selectedNode = prev[coord.row][coord.column];
-      if (selectedNode.state === "start") {
-        return prev;
-      }
       let newNodes = [...prev];
       newNodes[coord.row][coord.column] = {
         coord: selectedNode.coord,
@@ -44,6 +38,13 @@ const usePathfinding = (rows: number, columns: number) => {
             state: "open",
           };
           setStartNode({ coord: coord, state: selectedState });
+          break;
+        case "goal":
+          newNodes[goalNode.coord.row][goalNode.coord.column] = {
+            coord: goalNode.coord,
+            state: "open",
+          };
+          setGoalNode({ coord: coord, state: selectedState });
           break;
         default:
           break;
