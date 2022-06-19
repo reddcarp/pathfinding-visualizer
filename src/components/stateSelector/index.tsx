@@ -1,5 +1,6 @@
 import React from "react";
 import { NodeStateType } from "../../interfaces";
+import Option from "./Option";
 
 interface StateSelectorProps {
   handleSelectedStateChange: (state: NodeStateType) => void;
@@ -17,33 +18,20 @@ class StateSelector extends React.PureComponent<
   }
 
   render() {
-    console.log("rendered");
     return (
       <div id="state-selector-container">
-        <div
-          id="state-toggle"
-          toggle-state={
-            this.props.selectedState === "start" ? "toggled" : "none"
-          }
-          onClick={() => {
-            this.setState({ selectedState: "start" });
-            this.props.handleSelectedStateChange("start");
-          }}
-        >
-          Start
-        </div>
-        <div
-          id="state-toggle"
-          toggle-state={
-            this.props.selectedState === "goal" ? "toggled" : "none"
-          }
-          onClick={() => {
-            this.setState({ selectedState: "goal" });
-            this.props.handleSelectedStateChange("goal");
-          }}
-        >
-          Goal
-        </div>
+        <Option
+          displayName="Start"
+          stateName="start"
+          selectedState={this.props.selectedState}
+          handleSelectedStateChange={this.props.handleSelectedStateChange}
+        />
+        <Option
+          displayName="Goal"
+          stateName="goal"
+          selectedState={this.props.selectedState}
+          handleSelectedStateChange={this.props.handleSelectedStateChange}
+        />
       </div>
     );
   }
