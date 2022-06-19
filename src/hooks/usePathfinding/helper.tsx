@@ -11,13 +11,20 @@ const constructNodesRow = (row: number, columns: number) => {
   return rowArray;
 };
 
-const constructNodesArray = (rows: number, columns: number) => {
+const constructNodesArray = (
+  rows: number,
+  columns: number,
+  startNode: NodeType
+) => {
   let nodesArray = [];
 
   for (let i = 0; i < rows; i++) {
     let rowArray = constructNodesRow(i, columns);
     nodesArray.push(rowArray);
   }
+
+  // setting up the starting node
+  nodesArray[startNode.coord.row][startNode.coord.column].state = "start";
 
   return nodesArray;
 };

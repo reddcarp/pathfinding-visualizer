@@ -1,9 +1,9 @@
 import React from "react";
-import { CoordType, NodeType } from "../../interfaces";
+import { CoordType, NodeStateType, NodeType } from "../../interfaces";
 
 interface NodeProps {
   node: NodeType;
-  handleNodeChange: (coord: CoordType) => void;
+  handleNodeChange: (coord: CoordType, state: NodeStateType) => void;
 }
 
 interface NodeState {}
@@ -14,11 +14,11 @@ class Node extends React.Component<NodeProps, NodeState> {
   }
 
   handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    this.props.handleNodeChange(this.props.node.coord);
+    this.props.handleNodeChange(this.props.node.coord, "start");
   };
 
   shouldComponentUpdate(nextProps: NodeProps) {
-    return nextProps.node.state != this.props.node.state;
+    return nextProps.node.state !== this.props.node.state;
   }
 
   render() {

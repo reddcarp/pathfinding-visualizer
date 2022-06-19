@@ -1,11 +1,11 @@
 import React from "react";
-import { CoordType, NodeType } from "../../interfaces";
+import { CoordType, NodeStateType, NodeType } from "../../interfaces";
 import Node from "./Node";
 
 interface RowProps {
   rowNodesArray: NodeType[];
   rowid: number;
-  handleNodeChange: (coord: CoordType) => void;
+  handleNodeChange: (coord: CoordType, state: NodeStateType) => void;
 }
 
 interface RowState {}
