@@ -1,10 +1,10 @@
 import React from "react";
-import { CoordType, NodeStateType, NodeType } from "../../interfaces";
+import { CoordType, NodeType } from "../../interfaces";
 import Row from "./Row";
 
 interface GridProps {
   nodes: NodeType[][];
-  handleNodeChange: (coord: CoordType, state: NodeStateType) => void;
+  handleNodeChange: (coord: CoordType) => void;
 }
 
 interface GridState {}

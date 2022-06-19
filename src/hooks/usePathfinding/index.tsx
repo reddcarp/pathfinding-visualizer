@@ -7,26 +7,43 @@ const usePathfinding = (rows: number, columns: number) => {
     coord: { row: 0, column: 0 },
     state: "start",
   });
+  const [goalNode, setGoalNode]: [NodeType, any] = useState({
+    coord: { row: 0, column: columns - 1 },
+    state: "goal",
+  });
   const [nodes, setNodes] = useState(
-    constructNodesArray(rows, columns, startNode)
+    constructNodesArray(rows, columns, startNode, goalNode)
   );
 
-  const handleNodeChange = (coord: CoordType, state: NodeStateType) => {
+  const [selectedState, setSlectedState]: [NodeStateType, any] =
+    useState("start");
+
+  const handleSelectedStateChange = (state: NodeStateType) => {
+    setSlectedState(state);
+  };
+
+  const handleNodeChange = (coord: CoordType) => {
     setNodes((prev) => {
-      let previousNode = prev[coord.row][coord.column];
+      console.log(
+        "handleNodeChange called from " + coord.row + "," + coord.column
+      );
+      let selectedNode = prev[coord.row][coord.column];
+      if (selectedNode.state === "start") {
+        return prev;
+      }
       let newNodes = [...prev];
       newNodes[coord.row][coord.column] = {
-        coord: previousNode.coord,
-        state: "start",
+        coord: selectedNode.coord,
+        state: selectedState,
       };
 
-      switch (state) {
+      switch (selectedState) {
         case "start":
           newNodes[startNode.coord.row][startNode.coord.column] = {
             coord: startNode.coord,
             state: "open",
           };
-          setStartNode({ coord: coord, state: state });
+          setStartNode({ coord: coord, state: selectedState });
           break;
         default:
           break;
@@ -36,7 +53,7 @@ const usePathfinding = (rows: number, columns: number) => {
     });
   };
 
-  return { handleNodeChange, nodes };
+  return { handleNodeChange, nodes, handleSelectedStateChange };
 };
 
 export default usePathfinding;

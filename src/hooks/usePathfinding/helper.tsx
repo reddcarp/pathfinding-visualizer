@@ -14,7 +14,8 @@ const constructNodesRow = (row: number, columns: number) => {
 const constructNodesArray = (
   rows: number,
   columns: number,
-  startNode: NodeType
+  startNode: NodeType,
+  goalNode: NodeType
 ) => {
   let nodesArray = [];
 
@@ -25,6 +26,8 @@ const constructNodesArray = (
 
   // setting up the starting node
   nodesArray[startNode.coord.row][startNode.coord.column].state = "start";
+  // setting up the goal node
+  nodesArray[goalNode.coord.row][goalNode.coord.column].state = "goal";
 
   return nodesArray;
 };

@@ -11,8 +11,9 @@ body {
 
 :root {
   /* Colors */
-  --color-background: #121213;
-  --color-text: #fff;
+  --color-background: #fff;
+  --color-grid-border: #565758;
+  --color-text: #000;
 
   --node-size: 35px;
 }
@@ -26,7 +27,7 @@ code {
     monospace;
 }
 
-/* Grid */
+/******* Grid *********/
 #grid-container {
   flex: 1;
   display: flex;
@@ -44,17 +45,28 @@ code {
 
 #node {
   cursor: pointer;
-  margin: 1px;
   height: var(--node-size);
   width: var(--node-size);
+  border: solid 1px var(--color-grid-border);
 }
 #node[state-type="open"] {
-  border: solid 1px green;
 }
 #node[state-type="start"] {
-  background-color: blue;
-  border: solid 1px green;
+  background-color: green;
 }
 #node[state-type="goal"] {
   background-color: purple;
+}
+
+/******* State Selector *********/
+#state-selector-container {
+  display: flex;
+  flex-direction: row;
+}
+#state-toggle {
+  cursor: pointer;
+  margin: 10px;
+}
+#state-toggle[toggle-state="toggled"] {
+  color: red;
 }
