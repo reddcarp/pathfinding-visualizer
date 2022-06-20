@@ -28,6 +28,12 @@ class StateSelector extends React.PureComponent<
           selectedState={this.props.selectedState}
           handleSelectedStateChange={this.props.handleSelectedStateChange}
         />
+        <Option
+          displayName="Wall"
+          stateName="wall"
+          selectedState={this.props.selectedState}
+          handleSelectedStateChange={this.props.handleSelectedStateChange}
+        />
       </div>
     );
   }

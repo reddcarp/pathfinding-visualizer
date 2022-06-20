@@ -17,6 +17,7 @@ const updateUnvisitedNeighbors = (node: NodeType, nodes: NodeType[][]) => {
   const unvisitedNeighbors = getUnvisitedNeighbors(nodes, node);
   unvisitedNeighbors.forEach((neighbor) => {
     neighbor.distance = node.distance + 1;
+    neighbor.previousNode = node;
   });
 };
 
@@ -44,32 +45,49 @@ const dijkstra = (
 ) => {
   const newNodes = copyNodes(nodes);
   const visitedNodesInOrder: NodeType[] = [];
+  const shortestPathNodesInOrder: NodeType[] = [];
   newNodes[startNode.coord.row][startNode.coord.column].distance = 0;
   const unvisitedNodes = getAllNodes(newNodes);
 
   while (unvisitedNodes.length > 0) {
     sortNodesByDistance(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
-    if (!closestNode) return visitedNodesInOrder;
+    if (!closestNode) break;
+
+    // it's a wall, we can't go through it
+    if (closestNode.state === "wall") continue;
 
     // nowhere to go
     if (closestNode.distance === Infinity) {
-      return visitedNodesInOrder;
+      break;
     }
     closestNode.state = "visited";
     visitedNodesInOrder.push(closestNode);
 
-    // TODO: make start and goal node pointer to nodes node
     if (
       closestNode.coord.row === goalNode.coord.row &&
       closestNode.coord.column === goalNode.coord.column
     ) {
-      return visitedNodesInOrder;
+      break;
     }
     updateUnvisitedNeighbors(closestNode, newNodes);
   }
 
-  return visitedNodesInOrder;
+  // creating the shortestPath array in order
+  const lastNode = visitedNodesInOrder[visitedNodesInOrder.length - 1];
+  if (
+    lastNode &&
+    lastNode.coord.row === goalNode.coord.row &&
+    lastNode.coord.column === goalNode.coord.column
+  ) {
+    let currentNode: NodeType | undefined = lastNode;
+    while (currentNode !== undefined) {
+      shortestPathNodesInOrder.unshift(currentNode);
+      currentNode = currentNode.previousNode;
+    }
+  }
+
+  return [visitedNodesInOrder, shortestPathNodesInOrder];
 };
 
 export { dijkstra };

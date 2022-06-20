@@ -11,9 +11,13 @@ body {
 
 :root {
   /* Colors */
-  --color-background: #fff;
+  --color-background: #202124;
   --color-grid-border: #565758;
   --color-text: #000;
+
+  --color-node-visited-from: #3a417e;
+  --color-node-visited-to: #5ac9e0;
+  --color-node-looking: rgb(248, 235, 54);
 
   --node-size: 15px;
 }
@@ -60,7 +64,13 @@ code {
   cursor: default;
 }
 #node[state-type="visited"] {
-  background-color: blue;
+  animation: flip 5s ease forwards;
+}
+#node[state-type="wall"] {
+  background-color: #000;
+}
+#node[state-type="shortest-path"] {
+  background-color: yellow;
 }
 
 /******* State Selector *********/
@@ -74,4 +84,20 @@ code {
 }
 #state-toggle[toggle-state="toggled"] {
   color: red;
+}
+
+/****** ANIMATIONS *******/
+@keyframes flip {
+  0% {
+    background-color: var(--color-node-looking);
+  }
+  0.5% {
+    background-color: var(--color-node-looking);
+  }
+  2% {
+    background-color: var(--color-node-visited-from);
+  }
+  100% {
+    background-color: var(--color-node-visited-to);
+  }
 }

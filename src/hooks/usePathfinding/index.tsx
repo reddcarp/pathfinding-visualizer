@@ -72,7 +72,10 @@ const usePathfinding = (rows: number, columns: number) => {
     });
   };
 
-  const animateDijkstra = (visitedNodesInOrder: NodeType[]) => {
+  const animateDijkstra = (
+    visitedNodesInOrder: NodeType[],
+    shortestPathNodesInOrder: NodeType[]
+  ) => {
     visitedNodesInOrder.forEach((node, idx) => {
       setTimeout(() => {
         setNodes((prev) => {
@@ -86,14 +89,34 @@ const usePathfinding = (rows: number, columns: number) => {
         });
       }, 10 * idx);
     });
+
+    // shortest path animation
+    setTimeout(() => {
+      shortestPathNodesInOrder.forEach((node, idx) => {
+        setTimeout(() => {
+          setNodes((prev) => {
+            let newNodes = [...prev];
+            newNodes[node.coord.row][node.coord.column] = {
+              coord: node.coord,
+              state: "shortest-path",
+              distance: Infinity,
+            };
+            return newNodes;
+          });
+        }, 50 * idx);
+      });
+    }, 10 * visitedNodesInOrder.length);
   };
 
   const handlePathfindingVisualization = (algo: PathfindingType) => {
     switch (algo) {
       case "Dijkstra":
-        const visitedNodesInOrder = dijkstra(nodes, startNode, goalNode);
-        console.log(visitedNodesInOrder);
-        animateDijkstra(visitedNodesInOrder);
+        const [visitedNodesInOrder, shortestPathNodesInOrder] = dijkstra(
+          nodes,
+          startNode,
+          goalNode
+        );
+        animateDijkstra(visitedNodesInOrder, shortestPathNodesInOrder);
         break;
       default:
         break;
