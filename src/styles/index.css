@@ -59,6 +59,9 @@ code {
   background-color: purple;
   cursor: default;
 }
+#node[state-type="visited"] {
+  background-color: blue;
+}
 
 /******* State Selector *********/
 #state-selector-container {

@@ -4,7 +4,11 @@ const constructNodesRow = (row: number, columns: number) => {
   let rowArray = [];
 
   for (let i = 0; i < columns; i++) {
-    let node: NodeType = { coord: { row: row, column: i }, state: "open" };
+    let node: NodeType = {
+      coord: { row: row, column: i },
+      state: "open",
+      distance: Infinity,
+    };
     rowArray.push(node);
   }
 

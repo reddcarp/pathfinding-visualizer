@@ -8,6 +8,7 @@ interface CoordType {
 interface NodeType {
   state: NodeStateType;
   coord: CoordType;
+  distance: number;
 }
 
 type PathfindingType = "BFS" | "Dijkstra" | "A*" | "DFS";
