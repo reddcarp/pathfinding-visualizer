@@ -15,7 +15,7 @@ body {
   --color-grid-border: #565758;
   --color-text: #000;
 
-  --node-size: 35px;
+  --node-size: 15px;
 }
 
 #root {

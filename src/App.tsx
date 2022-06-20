@@ -11,7 +11,7 @@ function App() {
     handleSelectedStateChange,
     selectedState,
     handlePathfindingVisualization,
-  } = usePathfinding(10, 10);
+  } = usePathfinding(20, 50);
 
   return (
     <div className="App">

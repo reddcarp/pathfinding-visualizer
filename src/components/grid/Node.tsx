@@ -27,11 +27,7 @@ class Node extends React.Component<NodeProps, NodeState> {
 
     // forbids override of a goal or start node
     if (this.props.node.state === "goal" || this.props.node.state === "start") {
-      return (
-        <div id="node" state-type={this.props.node.state}>
-          {this.props.node.coord.row},{this.props.node.coord.column}
-        </div>
-      );
+      return <div id="node" state-type={this.props.node.state}></div>;
     }
 
     return (
@@ -39,9 +35,7 @@ class Node extends React.Component<NodeProps, NodeState> {
         onClick={(e) => this.handleClick(e)}
         id="node"
         state-type={this.props.node.state}
-      >
-        {this.props.node.coord.row},{this.props.node.coord.column}
-      </div>
+      ></div>
     );
   }
 }
