@@ -1,3 +1,4 @@
+import { copyNodes } from "../hooks/usePathfinding/helper";
 import { NodeType } from "../interfaces";
 
 const getAllNodes = (nodes: NodeType[][]) => {
@@ -41,9 +42,10 @@ const dijkstra = (
   startNode: NodeType,
   goalNode: NodeType
 ) => {
+  const newNodes = copyNodes(nodes);
   const visitedNodesInOrder: NodeType[] = [];
-  nodes[startNode.coord.row][startNode.coord.column].distance = 0;
-  const unvisitedNodes = getAllNodes(nodes);
+  newNodes[startNode.coord.row][startNode.coord.column].distance = 0;
+  const unvisitedNodes = getAllNodes(newNodes);
 
   while (unvisitedNodes.length > 0) {
     sortNodesByDistance(unvisitedNodes);
@@ -64,7 +66,7 @@ const dijkstra = (
     ) {
       return visitedNodesInOrder;
     }
-    updateUnvisitedNeighbors(closestNode, nodes);
+    updateUnvisitedNeighbors(closestNode, newNodes);
   }
 
   return visitedNodesInOrder;

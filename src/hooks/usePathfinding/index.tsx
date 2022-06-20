@@ -84,7 +84,7 @@ const usePathfinding = (rows: number, columns: number) => {
           };
           return newNodes;
         });
-      }, 100 * idx);
+      }, 25 * idx);
     });
   };
 

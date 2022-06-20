@@ -36,4 +36,22 @@ const constructNodesArray = (
   return nodesArray;
 };
 
-export { constructNodesArray };
+const copyNodes = (nodes: NodeType[][]) => {
+  const newNodes: NodeType[][] = [];
+
+  nodes.forEach((row) => {
+    const newRow: NodeType[] = [];
+    row.forEach((node) => {
+      newRow.push({
+        coord: node.coord,
+        distance: node.distance,
+        state: node.state,
+      });
+    });
+    newNodes.push(newRow);
+  });
+
+  return newNodes;
+};
+
+export { constructNodesArray, copyNodes };
