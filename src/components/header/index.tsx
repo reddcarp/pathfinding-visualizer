@@ -1,9 +1,10 @@
 import React from "react";
-import { PathfindingType } from "../../interfaces";
+import { NodeTrueType, PathfindingType } from "../../interfaces";
 
 interface HeaderProps {
   handlePathfindingVisualization: (algo: PathfindingType) => void;
   handleClearPath: () => void;
+  handleClearNodesByType: (nodeTypes: NodeTrueType[]) => void;
 }
 
 interface HeaderState {}
@@ -22,6 +23,20 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           Launch function
         </button>
         <button onClick={() => this.props.handleClearPath()}>Clear path</button>
+        <button onClick={() => this.props.handleClearNodesByType(["wall"])}>
+          Clear walls
+        </button>
+        <button
+          onClick={() =>
+            this.props.handleClearNodesByType([
+              "weight-2",
+              "weight-5",
+              "weight-10",
+            ])
+          }
+        >
+          Clear weights
+        </button>
       </div>
     );
   }

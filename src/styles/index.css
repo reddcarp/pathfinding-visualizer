@@ -77,14 +77,17 @@ code {
 #node[node-type="weight-2"] {
   background: url("../images/weight-2.svg") center no-repeat;
   background-size: contain;
+  animation: plop 0.9s ease-out forwards alternate;
 }
 #node[node-type="weight-5"] {
   background: url("../images/weight-5.svg") center no-repeat;
   background-size: contain;
+  animation: plop 0.9s ease-out forwards alternate;
 }
 #node[node-type="weight-10"] {
   background: url("../images/weight-10.svg") center no-repeat;
   background-size: contain;
+  animation: plop 0.9s ease-out forwards alternate;
 }
 
 #node[state-type="visited"] {

@@ -149,6 +149,26 @@ const usePathfinding = (rows: number, columns: number) => {
     }, 10 * visitedNodesInOrder.length);
   };
 
+  const handleClearNodesByType = (nodeTypes: NodeTrueType[]) => {
+    setNodes((prev) => {
+      const newNodes = [...prev];
+
+      newNodes.forEach((row) => {
+        row.forEach((node) => {
+          if (nodeTypes.includes(node.type)) {
+            newNodes[node.coord.row][node.coord.column] = {
+              coord: node.coord,
+              distance: Infinity,
+              type: "open",
+              weight: 1,
+            };
+          }
+        });
+      });
+
+      return newNodes;
+    });
+  };
   const handleClearPath = (callback?: any) => {
     setNodes((prev) => {
       const newNodes = [...prev];
@@ -199,6 +219,7 @@ const usePathfinding = (rows: number, columns: number) => {
     selectedNodeType,
     handleClearPath,
     handlePathfindingVisualization,
+    handleClearNodesByType,
   };
 };
 

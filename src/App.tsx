@@ -14,6 +14,7 @@ function App() {
     selectedNodeType,
     handleClearPath,
     handlePathfindingVisualization,
+    handleClearNodesByType,
   } = usePathfinding(20, 40);
 
   return (
@@ -21,6 +22,7 @@ function App() {
       <Header
         handleClearPath={handleClearPath}
         handlePathfindingVisualization={handlePathfindingVisualization}
+        handleClearNodesByType={handleClearNodesByType}
       />
       <StateSelector
         selectedNodeType={selectedNodeType}
