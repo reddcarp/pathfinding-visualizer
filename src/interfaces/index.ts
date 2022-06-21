@@ -5,8 +5,7 @@ type NodeTrueType =
   | "wall"
   | "weight-2"
   | "weight-5"
-  | "weight-10"
-  | "none";
+  | "weight-10";
 
 type NodeStateType =
   | "visited"

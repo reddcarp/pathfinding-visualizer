@@ -24,12 +24,29 @@ class MultiOption extends React.Component<MultiOptionProps, MultiOptionState> {
   }
 
   shouldComponentUpdate(nextProps: MultiOptionProps) {
-    if (this.props.selectedNodeType !== nextProps.selectedNodeType) {
-      if (this.props.stateNames.includes(this.props.selectedNodeType)) {
+    let lastProp = this.props;
+
+    if (lastProp.selectedNodeType !== nextProps.selectedNodeType) {
+      // case where we need to get deselected
+      if (
+        !lastProp.stateNames.includes(nextProps.selectedNodeType) &&
+        lastProp.stateNames.includes(lastProp.selectedNodeType)
+      ) {
         this.firstClick = true;
         return true;
       }
-      if (this.props.stateNames.includes(nextProps.selectedNodeType)) {
+
+      // case where we need to get selected
+      if (
+        !lastProp.stateNames.includes(lastProp.selectedNodeType) &&
+        lastProp.stateNames.includes(nextProps.selectedNodeType)
+      ) {
+        this.firstClick = false;
+        return true;
+      }
+
+      // case where we need to change our selection
+      if (lastProp.stateNames.includes(lastProp.selectedNodeType)) {
         this.firstClick = false;
         return true;
       }
@@ -49,6 +66,9 @@ class MultiOption extends React.Component<MultiOptionProps, MultiOptionState> {
         onClick={() => {
           this.setState(
             (state) => {
+              if (this.firstClick) {
+                return state;
+              }
               return {
                 index: (state.index + 1) % this.props.stateNames.length,
               };
