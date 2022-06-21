@@ -27,26 +27,20 @@ class MultiOption extends React.Component<MultiOptionProps, MultiOptionState> {
     let lastProp = this.props;
 
     if (lastProp.selectedNodeType !== nextProps.selectedNodeType) {
-      // case where we need to get deselected
-      if (
-        !lastProp.stateNames.includes(nextProps.selectedNodeType) &&
-        lastProp.stateNames.includes(lastProp.selectedNodeType)
-      ) {
-        this.firstClick = true;
-        return true;
-      }
+      let statePool = this.props.stateNames;
 
-      // case where we need to get selected
-      if (
-        !lastProp.stateNames.includes(lastProp.selectedNodeType) &&
-        lastProp.stateNames.includes(nextProps.selectedNodeType)
-      ) {
+      if (statePool.includes(lastProp.selectedNodeType)) {
+        // case where we get deselected
+        if (!statePool.includes(nextProps.selectedNodeType)) {
+          this.firstClick = true;
+          return true;
+        }
+        // case where our index changes
         this.firstClick = false;
         return true;
       }
-
-      // case where we need to change our selection
-      if (lastProp.stateNames.includes(lastProp.selectedNodeType)) {
+      // case where we need to get selected
+      else if (statePool.includes(nextProps.selectedNodeType)) {
         this.firstClick = false;
         return true;
       }
