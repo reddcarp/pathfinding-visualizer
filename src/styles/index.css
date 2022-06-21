@@ -64,11 +64,13 @@ code {
   background: url("../images/arrow-right.svg") center no-repeat;
   background-size: contain;
   cursor: default;
+  animation: plop 0.9s ease-out forwards alternate;
 }
 #node[state-type="goal"] {
   background: url("../images/target.svg") center no-repeat;
   background-size: contain;
   cursor: default;
+  animation: plop 0.9s ease-out forwards alternate;
 }
 
 #node[state-type="visited"] {
@@ -87,9 +89,6 @@ code {
 #outer-node[state-type="shortest-path"] {
   animation: shortestPath-outer 2s ease-out forwards alternate;
 }
-#node[state-type="shortest-path"] {
-  animation: shortestPath 2s ease-out forwards alternate;
-}
 #node[state-direction="right"] {
   background: url("../images/arrow-right.svg") center no-repeat;
   background-size: contain;
@@ -105,6 +104,9 @@ code {
 #node[state-direction="down"] {
   background: url("../images/arrow-down.svg") center no-repeat;
   background-size: contain;
+}
+#node[state-type="shortest-path"] {
+  animation: shortestPath 2s ease-out forwards alternate;
 }
 
 /******* State Selector *********/
