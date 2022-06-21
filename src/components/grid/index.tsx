@@ -4,7 +4,9 @@ import Row from "./Row";
 
 interface GridProps {
   nodes: NodeType[][];
-  handleNodeChange: (coord: CoordType) => void;
+  handleMouseDown: (coord: CoordType) => void;
+  handleMouseEnter: (coord: CoordType) => void;
+  handleMouseUp: () => void;
 }
 
 interface GridState {}
@@ -17,10 +19,12 @@ class Grid extends React.PureComponent<GridProps, GridState> {
   render() {
     return (
       <div id="grid-container">
-        <div id="grid">
+        <div id="grid" onMouseLeave={(e) => this.props.handleMouseUp()}>
           {this.props.nodes.map((rowNodesArray, idx) => (
             <Row
-              handleNodeChange={this.props.handleNodeChange}
+              handleMouseDown={this.props.handleMouseDown}
+              handleMouseUp={this.props.handleMouseUp}
+              handleMouseEnter={this.props.handleMouseEnter}
               key={idx}
               rowid={idx}
               rowNodesArray={rowNodesArray}

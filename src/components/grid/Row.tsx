@@ -5,7 +5,9 @@ import Node from "./Node";
 interface RowProps {
   rowNodesArray: NodeType[];
   rowid: number;
-  handleNodeChange: (coord: CoordType) => void;
+  handleMouseDown: (coord: CoordType) => void;
+  handleMouseEnter: (coord: CoordType) => void;
+  handleMouseUp: () => void;
 }
 
 interface RowState {}
@@ -20,7 +22,9 @@ class Row extends React.PureComponent<RowProps, RowState> {
       <div id="row">
         {this.props.rowNodesArray.map((node, idx) => (
           <Node
-            handleNodeChange={this.props.handleNodeChange}
+            handleMouseDown={this.props.handleMouseDown}
+            handleMouseUp={this.props.handleMouseUp}
+            handleMouseEnter={this.props.handleMouseEnter}
             key={this.props.rowid + "," + idx}
             node={node}
           />

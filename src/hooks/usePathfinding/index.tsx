@@ -24,9 +24,29 @@ const usePathfinding = (rows: number, columns: number) => {
   );
 
   const [selectedState, setSlectedState] = useState<NodeStateType>("start");
+  const [isMousePressed, setIsMousePressed] = useState(false);
 
   const handleSelectedStateChange = (state: NodeStateType) => {
     setSlectedState(state);
+  };
+
+  const handleMouseUp = () => {
+    setIsMousePressed(false);
+  };
+  const handleMouseEnter = (coord: CoordType) => {
+    if (isMousePressed) {
+      handleNodeChange(coord);
+    }
+  };
+  const handleMouseDown = (coord: CoordType) => {
+    handleNodeChange(coord);
+
+    // we dont want the mousePressed behavior for the goal and start node
+    if (selectedState === "goal" || selectedState === "start") {
+      setIsMousePressed(false);
+    } else {
+      setIsMousePressed(true);
+    }
   };
 
   const handleNodeChange = (coord: CoordType) => {
@@ -124,7 +144,9 @@ const usePathfinding = (rows: number, columns: number) => {
   };
 
   return {
-    handleNodeChange,
+    handleMouseDown,
+    handleMouseUp,
+    handleMouseEnter,
     nodes,
     handleSelectedStateChange,
     selectedState,

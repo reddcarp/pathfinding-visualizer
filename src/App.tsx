@@ -6,7 +6,9 @@ import "./styles/App.css";
 
 function App() {
   const {
-    handleNodeChange,
+    handleMouseDown,
+    handleMouseUp,
+    handleMouseEnter,
     nodes,
     handleSelectedStateChange,
     selectedState,
@@ -20,7 +22,12 @@ function App() {
         selectedState={selectedState}
         handleSelectedStateChange={handleSelectedStateChange}
       />
-      <Grid handleNodeChange={handleNodeChange} nodes={nodes} />
+      <Grid
+        handleMouseDown={handleMouseDown}
+        handleMouseUp={handleMouseUp}
+        handleMouseEnter={handleMouseEnter}
+        nodes={nodes}
+      />
     </div>
   );
 }

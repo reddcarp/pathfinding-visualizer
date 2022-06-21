@@ -11,13 +11,15 @@ body {
 
 :root {
   /* Colors */
-  --color-background: #202124;
-  --color-grid-border: #565758;
-  --color-text: #000;
+  --color-background: #121213;
+  --color-grid-border: #3a3a3c;
+  --color-text: #fff;
 
   --color-node-visited-from: #3a417e;
   --color-node-visited-to: #5ac9e0;
   --color-node-looking: rgb(248, 235, 54);
+  --color-node-wall: #8a8a8a;
+  --color-node-shortest-path: #fffe6a;
 
   --node-size: 15px;
 }
@@ -47,30 +49,45 @@ code {
   display: flex;
 }
 
+#outer-node {
+  border: solid 1px var(--color-grid-border);
+}
 #node {
   cursor: pointer;
   height: var(--node-size);
   width: var(--node-size);
-  border: solid 1px var(--color-grid-border);
 }
+
 #node[state-type="open"] {
 }
 #node[state-type="start"] {
-  background-color: green;
+  background: url("../images/arrow-right.svg") center no-repeat;
+  background-size: contain;
   cursor: default;
 }
 #node[state-type="goal"] {
-  background-color: purple;
+  background: url("../images/target.svg") center no-repeat;
+  background-size: contain;
   cursor: default;
 }
 #node[state-type="visited"] {
-  animation: flip 5s ease forwards;
+  animation: visitedAnimation 1.5s ease-out forwards alternate;
+}
+
+#outer-node[state-type="wall"] {
+  border: 0;
 }
 #node[state-type="wall"] {
-  background-color: #000;
+  background-color: var(--color-node-wall);
+  border: solid 1px var(--color-node-wall);
+  animation: plop 0.5s ease-out forwards alternate;
+}
+
+#outer-node[state-type="shortest-path"] {
+  animation: shortestPath-outer 1.5s ease-out forwards alternate;
 }
 #node[state-type="shortest-path"] {
-  background-color: yellow;
+  animation: shortestPath 1.5s ease-out forwards alternate;
 }
 
 /******* State Selector *********/
@@ -87,17 +104,69 @@ code {
 }
 
 /****** ANIMATIONS *******/
-@keyframes flip {
+@keyframes visitedAnimation {
   0% {
-    background-color: var(--color-node-looking);
+    transform: scale(0.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 100%;
   }
-  0.5% {
-    background-color: var(--color-node-looking);
+  50% {
+    background-color: rgba(17, 104, 217, 0.75);
   }
-  2% {
-    background-color: var(--color-node-visited-from);
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(0, 217, 159, 0.75);
   }
   100% {
-    background-color: var(--color-node-visited-to);
+    transform: scale(1);
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+@keyframes shortestPath {
+  0% {
+    transform: scale(0.3);
+    background-color: var(--color-node-shortest-path);
+    border: 0;
+  }
+  75% {
+    transform: scale(1.2);
+    background-color: var(--color-node-shortest-path);
+    border: 0;
+  }
+  99% {
+    border: 0;
+  }
+  100% {
+    transform: scale(1);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+  }
+}
+
+@keyframes shortestPath-outer {
+  0% {
+    border: solid 1px transparent;
+    background-color: transparent;
+  }
+  99% {
+    border: solid 1px transparent;
+    background-color: transparent;
+  }
+  100% {
+    border: 0;
+    background-color: transparent;
+  }
+}
+
+@keyframes plop {
+  0% {
+    transform: scale(0.6);
+  }
+  90% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }
