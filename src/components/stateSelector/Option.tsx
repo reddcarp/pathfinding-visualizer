@@ -12,7 +12,15 @@ interface OptionState {}
 
 class Option extends React.Component<OptionProps, OptionState> {
   shouldComponentUpdate(nextProps: OptionProps) {
-    return nextProps.selectedNodeType !== this.props.selectedNodeType;
+    if (this.props.selectedNodeType !== nextProps.selectedNodeType) {
+      if (this.props.selectedNodeType === this.props.stateName) {
+        return true;
+      }
+      if (this.props.stateName === nextProps.selectedNodeType) {
+        return true;
+      }
+    }
+    return false;
   }
 
   render() {
@@ -25,7 +33,6 @@ class Option extends React.Component<OptionProps, OptionState> {
             : "none"
         }
         onClick={() => {
-          this.setState({ selectedState: this.props.stateName });
           this.props.handleSelectedNodeType(this.props.stateName);
         }}
       >

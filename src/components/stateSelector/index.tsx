@@ -1,5 +1,6 @@
 import React from "react";
 import { NodeTrueType } from "../../interfaces";
+import MultiOption from "./MultiOption";
 import Option from "./Option";
 
 interface StateSelectorProps {
@@ -9,10 +10,14 @@ interface StateSelectorProps {
 
 interface StateSelectorState {}
 
-class StateSelector extends React.PureComponent<
+class StateSelector extends React.Component<
   StateSelectorProps,
   StateSelectorState
 > {
+  shouldComponentUpdate(nextProps: StateSelectorProps) {
+    return nextProps.selectedNodeType !== this.props.selectedNodeType;
+  }
+
   render() {
     return (
       <div id="state-selector-container">
@@ -31,6 +36,12 @@ class StateSelector extends React.PureComponent<
         <Option
           displayName="Wall"
           stateName="wall"
+          selectedNodeType={this.props.selectedNodeType}
+          handleSelectedNodeType={this.props.handleSelectedNodeType}
+        />
+        <MultiOption
+          displayNames={["Weight(2)", "Weight(5)", "Weight(10)"]}
+          stateNames={["weight-2", "weight-5", "weight-10"]}
           selectedNodeType={this.props.selectedNodeType}
           handleSelectedNodeType={this.props.handleSelectedNodeType}
         />

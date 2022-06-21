@@ -8,7 +8,11 @@ interface HeaderProps {
 
 interface HeaderState {}
 
-class Header extends React.PureComponent<HeaderProps, HeaderState> {
+class Header extends React.Component<HeaderProps, HeaderState> {
+  shouldComponentUpdate(nextProps: HeaderProps) {
+    return false;
+  }
+
   render() {
     return (
       <div id="header">
