@@ -126,7 +126,7 @@ const usePathfinding = (rows: number, columns: number) => {
             let newNodes = [...prev];
             newNodes[node.coord.row][node.coord.column] = {
               coord: node.coord,
-              state: "shortest-path",
+              state: node.state,
               distance: Infinity,
               direction: node.direction,
               type: node.type,

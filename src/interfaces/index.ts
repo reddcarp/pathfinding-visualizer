@@ -1,6 +1,10 @@
 type NodeTrueType = "open" | "start" | "goal" | "wall";
 
-type NodeStateType = "visited" | "shortest-path" | undefined;
+type NodeStateType =
+  | "visited"
+  | "shortest-path"
+  | "shortest-path-special"
+  | undefined;
 
 type Direction = "up" | "down" | "left" | "right";
 

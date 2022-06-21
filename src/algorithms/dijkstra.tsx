@@ -82,6 +82,12 @@ const dijkstra = (
   ) {
     let currentNode: NodeType | undefined = lastNode;
     while (currentNode !== undefined) {
+      // setting the proper state
+      currentNode.state =
+        currentNode.type === "goal" || currentNode.type === "start"
+          ? "shortest-path-special"
+          : "shortest-path";
+
       shortestPathNodesInOrder.unshift(currentNode);
 
       let nextNode = currentNode;
