@@ -1,10 +1,10 @@
 import React from "react";
-import { NodeStateType } from "../../interfaces";
+import { NodeTrueType } from "../../interfaces";
 import Option from "./Option";
 
 interface StateSelectorProps {
-  handleSelectedStateChange: (state: NodeStateType) => void;
-  selectedState: NodeStateType;
+  handleSelectedNodeType: (type: NodeTrueType) => void;
+  selectedNodeType: NodeTrueType;
 }
 
 interface StateSelectorState {}
@@ -19,20 +19,20 @@ class StateSelector extends React.PureComponent<
         <Option
           displayName="Start"
           stateName="start"
-          selectedState={this.props.selectedState}
-          handleSelectedStateChange={this.props.handleSelectedStateChange}
+          selectedNodeType={this.props.selectedNodeType}
+          handleSelectedNodeType={this.props.handleSelectedNodeType}
         />
         <Option
           displayName="Goal"
           stateName="goal"
-          selectedState={this.props.selectedState}
-          handleSelectedStateChange={this.props.handleSelectedStateChange}
+          selectedNodeType={this.props.selectedNodeType}
+          handleSelectedNodeType={this.props.handleSelectedNodeType}
         />
         <Option
           displayName="Wall"
           stateName="wall"
-          selectedState={this.props.selectedState}
-          handleSelectedStateChange={this.props.handleSelectedStateChange}
+          selectedNodeType={this.props.selectedNodeType}
+          handleSelectedNodeType={this.props.handleSelectedNodeType}
         />
       </div>
     );

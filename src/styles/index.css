@@ -58,15 +58,15 @@ code {
   width: var(--node-size);
 }
 
-#node[state-type="open"] {
+#node[node-type="open"] {
 }
-#node[state-type="start"] {
+#node[node-type="start"] {
   background: url("../images/arrow-right.svg") center no-repeat;
   background-size: contain;
   cursor: default;
   animation: plop 0.9s ease-out forwards alternate;
 }
-#node[state-type="goal"] {
+#node[node-type="goal"] {
   background: url("../images/target.svg") center no-repeat;
   background-size: contain;
   cursor: default;
@@ -77,10 +77,10 @@ code {
   animation: visitedAnimation 1.5s ease-out forwards alternate;
 }
 
-#outer-node[state-type="wall"] {
+#outer-node[node-type="wall"] {
   border: 0;
 }
-#node[state-type="wall"] {
+#node[node-type="wall"] {
   background-color: var(--color-node-wall);
   border: solid 1px var(--color-node-wall);
   animation: plop 0.5s ease-out forwards alternate;

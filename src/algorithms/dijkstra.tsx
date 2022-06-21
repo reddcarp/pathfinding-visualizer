@@ -55,7 +55,7 @@ const dijkstra = (
     if (!closestNode) break;
 
     // it's a wall, we can't go through it
-    if (closestNode.state === "wall") continue;
+    if (closestNode.type === "wall") continue;
 
     // nowhere to go
     if (closestNode.distance === Infinity) {

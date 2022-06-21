@@ -10,8 +10,8 @@ function App() {
     handleMouseUp,
     handleMouseEnter,
     nodes,
-    handleSelectedStateChange,
-    selectedState,
+    handleSelectedNodeType,
+    selectedNodeType,
     handlePathfindingVisualization,
   } = usePathfinding(20, 40);
 
@@ -19,8 +19,8 @@ function App() {
     <div className="App">
       <Header handlePathfindingVisualization={handlePathfindingVisualization} />
       <StateSelector
-        selectedState={selectedState}
-        handleSelectedStateChange={handleSelectedStateChange}
+        selectedNodeType={selectedNodeType}
+        handleSelectedNodeType={handleSelectedNodeType}
       />
       <Grid
         handleMouseDown={handleMouseDown}

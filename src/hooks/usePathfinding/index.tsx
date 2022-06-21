@@ -2,7 +2,7 @@ import { useState } from "react";
 import { dijkstra } from "../../algorithms/dijkstra";
 import {
   CoordType,
-  NodeStateType,
+  NodeTrueType,
   NodeType,
   PathfindingType,
 } from "../../interfaces";
@@ -11,23 +11,24 @@ import { constructNodesArray } from "./helper";
 const usePathfinding = (rows: number, columns: number) => {
   const [startNode, setStartNode] = useState<NodeType>({
     coord: { row: 0, column: 0 },
-    state: "start",
     distance: Infinity,
+    type: "start",
   });
   const [goalNode, setGoalNode] = useState<NodeType>({
     coord: { row: 0, column: columns - 1 },
-    state: "goal",
     distance: Infinity,
+    type: "goal",
   });
   const [nodes, setNodes] = useState<NodeType[][]>(
     constructNodesArray(rows, columns, startNode, goalNode)
   );
 
-  const [selectedState, setSlectedState] = useState<NodeStateType>("start");
+  const [selectedNodeType, setSelectedNodeType] =
+    useState<NodeTrueType>("start");
   const [isMousePressed, setIsMousePressed] = useState(false);
 
-  const handleSelectedStateChange = (state: NodeStateType) => {
-    setSlectedState(state);
+  const handleSelectedNodeType = (type: NodeTrueType) => {
+    setSelectedNodeType(type);
   };
 
   const handleMouseUp = () => {
@@ -42,7 +43,7 @@ const usePathfinding = (rows: number, columns: number) => {
     handleNodeChange(coord);
 
     // we dont want the mousePressed behavior for the goal and start node
-    if (selectedState === "goal" || selectedState === "start") {
+    if (selectedNodeType === "goal" || selectedNodeType === "start") {
       setIsMousePressed(false);
     } else {
       setIsMousePressed(true);
@@ -55,33 +56,33 @@ const usePathfinding = (rows: number, columns: number) => {
       let newNodes = [...prev];
       newNodes[coord.row][coord.column] = {
         coord: selectedNode.coord,
-        state: selectedState,
         distance: Infinity,
+        type: selectedNodeType,
       };
 
-      switch (selectedState) {
+      switch (selectedNodeType) {
         case "start":
           newNodes[startNode.coord.row][startNode.coord.column] = {
             coord: startNode.coord,
-            state: "open",
             distance: Infinity,
+            type: "open",
           };
           setStartNode({
             coord: coord,
-            state: selectedState,
             distance: Infinity,
+            type: selectedNodeType,
           });
           break;
         case "goal":
           newNodes[goalNode.coord.row][goalNode.coord.column] = {
             coord: goalNode.coord,
-            state: "open",
             distance: Infinity,
+            type: "open",
           };
           setGoalNode({
             coord: coord,
-            state: selectedState,
             distance: Infinity,
+            type: selectedNodeType,
           });
           break;
         default:
@@ -102,8 +103,9 @@ const usePathfinding = (rows: number, columns: number) => {
           let newNodes = [...prev];
           newNodes[node.coord.row][node.coord.column] = {
             coord: node.coord,
-            state: node.state,
+            state: "visited",
             distance: Infinity,
+            type: node.type,
           };
           return newNodes;
         });
@@ -121,6 +123,7 @@ const usePathfinding = (rows: number, columns: number) => {
               state: "shortest-path",
               distance: Infinity,
               direction: node.direction,
+              type: node.type,
             };
             return newNodes;
           });
@@ -149,8 +152,8 @@ const usePathfinding = (rows: number, columns: number) => {
     handleMouseUp,
     handleMouseEnter,
     nodes,
-    handleSelectedStateChange,
-    selectedState,
+    handleSelectedNodeType,
+    selectedNodeType,
     handlePathfindingVisualization,
   };
 };

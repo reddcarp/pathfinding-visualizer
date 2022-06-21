@@ -1,11 +1,11 @@
 import React from "react";
-import { NodeStateType } from "../../interfaces";
+import { NodeTrueType } from "../../interfaces";
 
 interface OptionProps {
-  selectedState: NodeStateType;
-  stateName: NodeStateType;
+  selectedNodeType: NodeTrueType;
+  stateName: NodeTrueType;
   displayName: string;
-  handleSelectedStateChange: (state: NodeStateType) => void;
+  handleSelectedNodeType: (state: NodeTrueType) => void;
 }
 
 interface OptionState {}
@@ -16,11 +16,13 @@ class Option extends React.PureComponent<OptionProps, OptionState> {
       <div
         id="state-toggle"
         toggle-state={
-          this.props.selectedState === this.props.stateName ? "toggled" : "none"
+          this.props.selectedNodeType === this.props.stateName
+            ? "toggled"
+            : "none"
         }
         onClick={() => {
           this.setState({ selectedState: this.props.stateName });
-          this.props.handleSelectedStateChange(this.props.stateName);
+          this.props.handleSelectedNodeType(this.props.stateName);
         }}
       >
         {this.props.displayName}

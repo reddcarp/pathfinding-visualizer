@@ -1,10 +1,6 @@
-type NodeStateType =
-  | "open"
-  | "visited"
-  | "start"
-  | "goal"
-  | "wall"
-  | "shortest-path";
+type NodeTrueType = "open" | "start" | "goal" | "wall";
+
+type NodeStateType = "visited" | "shortest-path" | undefined;
 
 type Direction = "up" | "down" | "left" | "right";
 
@@ -14,13 +10,20 @@ interface CoordType {
 }
 
 interface NodeType {
-  state: NodeStateType;
+  state?: NodeStateType;
   coord: CoordType;
   distance: number;
   previousNode?: NodeType;
   direction?: Direction;
+  type: NodeTrueType;
 }
 
 type PathfindingType = "BFS" | "Dijkstra" | "A*" | "DFS";
 
-export type { NodeStateType, NodeType, CoordType, PathfindingType };
+export type {
+  NodeStateType,
+  NodeType,
+  CoordType,
+  PathfindingType,
+  NodeTrueType,
+};

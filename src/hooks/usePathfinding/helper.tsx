@@ -6,8 +6,8 @@ const constructNodesRow = (row: number, columns: number) => {
   for (let i = 0; i < columns; i++) {
     let node: NodeType = {
       coord: { row: row, column: i },
-      state: "open",
       distance: Infinity,
+      type: "open",
     };
     rowArray.push(node);
   }
@@ -29,9 +29,9 @@ const constructNodesArray = (
   }
 
   // setting up the starting node
-  nodesArray[startNode.coord.row][startNode.coord.column].state = "start";
+  nodesArray[startNode.coord.row][startNode.coord.column].type = "start";
   // setting up the goal node
-  nodesArray[goalNode.coord.row][goalNode.coord.column].state = "goal";
+  nodesArray[goalNode.coord.row][goalNode.coord.column].type = "goal";
 
   return nodesArray;
 };
@@ -46,6 +46,9 @@ const copyNodes = (nodes: NodeType[][]) => {
         coord: node.coord,
         distance: node.distance,
         state: node.state,
+        type: node.type,
+        direction: node.direction,
+        previousNode: node.previousNode,
       });
     });
     newNodes.push(newRow);
