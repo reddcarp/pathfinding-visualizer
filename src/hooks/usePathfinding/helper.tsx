@@ -8,6 +8,7 @@ const constructNodesRow = (row: number, columns: number) => {
       coord: { row: row, column: i },
       distance: Infinity,
       type: "open",
+      weight: 1,
     };
     rowArray.push(node);
   }
@@ -49,6 +50,7 @@ const copyNodes = (nodes: NodeType[][]) => {
         type: node.type,
         direction: node.direction,
         previousNode: node.previousNode,
+        weight: node.weight,
       });
     });
     newNodes.push(newRow);

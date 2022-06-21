@@ -11,6 +11,9 @@ type NodeStateType =
   | "visited"
   | "shortest-path"
   | "shortest-path-special"
+  | "shortest-path-weight-2"
+  | "shortest-path-weight-5"
+  | "shortest-path-weight-10"
   | undefined;
 
 type Direction = "up" | "down" | "left" | "right";
@@ -27,6 +30,7 @@ interface NodeType {
   previousNode?: NodeType;
   direction?: Direction;
   type: NodeTrueType;
+  weight: number;
 }
 
 type PathfindingType = "BFS" | "Dijkstra" | "A*" | "DFS";

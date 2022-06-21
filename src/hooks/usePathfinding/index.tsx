@@ -19,11 +19,13 @@ const usePathfinding = (rows: number, columns: number) => {
     coord: { row: INITIAL_NODES_ROW, column: INITIAL_START_NODE_COLUMN },
     distance: Infinity,
     type: "start",
+    weight: 1,
   });
   const [goalNode, setGoalNode] = useState<NodeType>({
     coord: { row: INITIAL_NODES_ROW, column: INITIAL_GOAL_NODE_COLUMN },
     distance: Infinity,
     type: "goal",
+    weight: 1,
   });
   const [nodes, setNodes] = useState<NodeType[][]>(
     constructNodesArray(rows, columns, startNode, goalNode)
@@ -56,6 +58,9 @@ const usePathfinding = (rows: number, columns: number) => {
     }
   };
   const handleNodeChange = (coord: CoordType) => {
+    const typeSplit = selectedNodeType.split("-");
+    const weight = typeSplit[0] === "weight" ? parseInt(typeSplit[1]) : 1;
+
     setNodes((prev) => {
       let selectedNode = prev[coord.row][coord.column];
       let newNodes = [...prev];
@@ -63,6 +68,7 @@ const usePathfinding = (rows: number, columns: number) => {
         coord: selectedNode.coord,
         distance: Infinity,
         type: selectedNodeType,
+        weight: weight,
       };
 
       switch (selectedNodeType) {
@@ -71,11 +77,13 @@ const usePathfinding = (rows: number, columns: number) => {
             coord: startNode.coord,
             distance: Infinity,
             type: "open",
+            weight: startNode.weight,
           };
           setStartNode({
             coord: coord,
             distance: Infinity,
             type: selectedNodeType,
+            weight: startNode.weight,
           });
           break;
         case "goal":
@@ -83,11 +91,13 @@ const usePathfinding = (rows: number, columns: number) => {
             coord: goalNode.coord,
             distance: Infinity,
             type: "open",
+            weight: goalNode.weight,
           };
           setGoalNode({
             coord: coord,
             distance: Infinity,
             type: selectedNodeType,
+            weight: goalNode.weight,
           });
           break;
         default:
@@ -111,6 +121,7 @@ const usePathfinding = (rows: number, columns: number) => {
             state: "visited",
             distance: Infinity,
             type: node.type,
+            weight: node.weight,
           };
           return newNodes;
         });
@@ -129,6 +140,7 @@ const usePathfinding = (rows: number, columns: number) => {
               distance: Infinity,
               direction: node.direction,
               type: node.type,
+              weight: node.weight,
             };
             return newNodes;
           });
@@ -148,6 +160,7 @@ const usePathfinding = (rows: number, columns: number) => {
               coord: node.coord,
               distance: Infinity,
               type: node.type,
+              weight: node.weight,
             };
           }
         });

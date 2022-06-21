@@ -73,6 +73,20 @@ code {
   animation: plop 0.9s ease-out forwards alternate;
 }
 
+/* Weights */
+#node[node-type="weight-2"] {
+  background: url("../images/weight-2.svg") center no-repeat;
+  background-size: contain;
+}
+#node[node-type="weight-5"] {
+  background: url("../images/weight-5.svg") center no-repeat;
+  background-size: contain;
+}
+#node[node-type="weight-10"] {
+  background: url("../images/weight-10.svg") center no-repeat;
+  background-size: contain;
+}
+
 #node[state-type="visited"] {
   animation: visitedAnimation 1.5s ease-out forwards alternate;
 }
@@ -92,6 +106,16 @@ code {
 #outer-node[state-type="shortest-path-special"] {
   border: 0;
 }
+#outer-node[state-type="shortest-path-weight-2"] {
+  border: 0;
+}
+#outer-node[state-type="shortest-path-weight-5"] {
+  border: 0;
+}
+#outer-node[state-type="shortest-path-weight-10"] {
+  border: 0;
+}
+
 #node[state-direction="right"] {
   background: url("../images/arrow-right.svg") center no-repeat;
   background-size: contain;
@@ -108,11 +132,22 @@ code {
   background: url("../images/arrow-down.svg") center no-repeat;
   background-size: contain;
 }
+
 #node[state-type="shortest-path"] {
   animation: shortestPath 2s ease-out forwards alternate;
 }
 #node[state-type="shortest-path-special"] {
   animation: shortestPathSpecial 2s ease-out forwards alternate;
+}
+
+#node[state-type="shortest-path-weight-2"] {
+  animation: shortestPathWeight2 2s ease-out forwards alternate;
+}
+#node[state-type="shortest-path-weight-5"] {
+  animation: shortestPathWeight5 2s ease-out forwards alternate;
+}
+#node[state-type="shortest-path-weight-10"] {
+  animation: shortestPathWeight10 2s ease-out forwards alternate;
 }
 
 /******* State Selector *********/
@@ -188,6 +223,69 @@ code {
     transform: scale(1);
     background-color: var(--color-node-shortest-path);
     border: solid 1px var(--color-node-shortest-path);
+  }
+}
+@keyframes shortestPathWeight2 {
+  0% {
+    transform: scale(0.6);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+  }
+  50% {
+    transform: scale(1.2);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+  }
+  85% {
+    background-image: url("../images/weight-2.svg");
+  }
+  100% {
+    transform: scale(1);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+    background-image: url("../images/weight-2.svg");
+  }
+}
+@keyframes shortestPathWeight5 {
+  0% {
+    transform: scale(0.6);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+  }
+  50% {
+    transform: scale(1.2);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+  }
+  85% {
+    background-image: url("../images/weight-5.svg");
+  }
+  100% {
+    transform: scale(1);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+    background-image: url("../images/weight-5.svg");
+  }
+}
+@keyframes shortestPathWeight10 {
+  0% {
+    transform: scale(0.6);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+  }
+  50% {
+    transform: scale(1.2);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+  }
+  85% {
+    background-image: url("../images/weight-10.svg");
+  }
+  100% {
+    transform: scale(1);
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
+    background-image: url("../images/weight-10.svg");
   }
 }
 

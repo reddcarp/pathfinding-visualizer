@@ -1,5 +1,5 @@
 import { copyNodes } from "../hooks/usePathfinding/helper";
-import { NodeType } from "../interfaces";
+import { NodeStateType, NodeTrueType, NodeType } from "../interfaces";
 
 const getAllNodes = (nodes: NodeType[][]) => {
   const unvisitedNodes: NodeType[] = [];
@@ -16,7 +16,7 @@ const getAllNodes = (nodes: NodeType[][]) => {
 const updateUnvisitedNeighbors = (node: NodeType, nodes: NodeType[][]) => {
   const unvisitedNeighbors = getUnvisitedNeighbors(nodes, node);
   unvisitedNeighbors.forEach((neighbor) => {
-    neighbor.distance = node.distance + 1;
+    neighbor.distance = node.distance + neighbor.weight;
     neighbor.previousNode = node;
   });
 };
@@ -83,10 +83,7 @@ const dijkstra = (
     let currentNode: NodeType | undefined = lastNode;
     while (currentNode !== undefined) {
       // setting the proper state
-      currentNode.state =
-        currentNode.type === "goal" || currentNode.type === "start"
-          ? "shortest-path-special"
-          : "shortest-path";
+      currentNode.state = getShortestPathState(currentNode.type);
 
       shortestPathNodesInOrder.unshift(currentNode);
 
@@ -101,6 +98,23 @@ const dijkstra = (
   }
 
   return [visitedNodesInOrder, shortestPathNodesInOrder];
+};
+
+const getShortestPathState = (type: NodeTrueType): NodeStateType => {
+  switch (type) {
+    case "goal":
+      return "shortest-path-special";
+    case "start":
+      return "shortest-path-special";
+    case "weight-2":
+      return "shortest-path-weight-2";
+    case "weight-5":
+      return "shortest-path-weight-5";
+    case "weight-10":
+      return "shortest-path-weight-10";
+    default:
+      return "shortest-path";
+  }
 };
 
 const getDirection = (from: NodeType, to: NodeType) => {
