@@ -98,27 +98,6 @@ const usePathfinding = (rows: number, columns: number) => {
     });
   };
 
-  const handleClearPath = (callback?: any) => {
-    setNodes((prev) => {
-      const newNodes = [...prev];
-
-      newNodes.forEach((row) => {
-        row.forEach((node) => {
-          if (node.state !== undefined) {
-            newNodes[node.coord.row][node.coord.column] = {
-              coord: node.coord,
-              distance: Infinity,
-              type: node.type,
-            };
-          }
-        });
-      });
-
-      if (callback) callback();
-      return newNodes;
-    });
-  };
-
   const animateDijkstra = (
     visitedNodesInOrder: NodeType[],
     shortestPathNodesInOrder: NodeType[]
@@ -158,6 +137,26 @@ const usePathfinding = (rows: number, columns: number) => {
     }, 10 * visitedNodesInOrder.length);
   };
 
+  const handleClearPath = (callback?: any) => {
+    setNodes((prev) => {
+      const newNodes = [...prev];
+
+      newNodes.forEach((row) => {
+        row.forEach((node) => {
+          if (node.state !== undefined) {
+            newNodes[node.coord.row][node.coord.column] = {
+              coord: node.coord,
+              distance: Infinity,
+              type: node.type,
+            };
+          }
+        });
+      });
+
+      if (callback) callback();
+      return newNodes;
+    });
+  };
   const launchAppropriateVisualization = (algo: PathfindingType) => {
     setTimeout(() => {
       switch (algo) {
@@ -174,7 +173,6 @@ const usePathfinding = (rows: number, columns: number) => {
       }
     }, 10);
   };
-
   const handlePathfindingVisualization = (algo: PathfindingType) => {
     handleClearPath(launchAppropriateVisualization(algo));
   };

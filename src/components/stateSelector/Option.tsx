@@ -10,7 +10,11 @@ interface OptionProps {
 
 interface OptionState {}
 
-class Option extends React.PureComponent<OptionProps, OptionState> {
+class Option extends React.Component<OptionProps, OptionState> {
+  shouldComponentUpdate(nextProps: OptionProps) {
+    return nextProps.selectedNodeType !== this.props.selectedNodeType;
+  }
+
   render() {
     return (
       <div
