@@ -3,6 +3,7 @@ import { PathfindingType } from "../../interfaces";
 
 interface HeaderProps {
   handlePathfindingVisualization: (algo: PathfindingType) => void;
+  handleClearPath: () => void;
 }
 
 interface HeaderState {}
@@ -16,6 +17,7 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
         >
           Launch function
         </button>
+        <button onClick={() => this.props.handleClearPath()}>Clear path</button>
       </div>
     );
   }

@@ -87,10 +87,10 @@ code {
 }
 
 #outer-node[state-type="shortest-path"] {
-  animation: shortestPath-outer 2s ease-out forwards alternate;
+  border: 0;
 }
 #outer-node[state-type="shortest-path-special"] {
-  animation: shortestPath-outer 2s ease-out forwards alternate;
+  border: 0;
 }
 #node[state-direction="right"] {
   background: url("../images/arrow-right.svg") center no-repeat;
@@ -152,18 +152,18 @@ code {
   0% {
     transform: scale(0.6);
     background-color: var(--color-node-shortest-path);
-    border: 0;
+    border: solid 1px var(--color-node-shortest-path);
   }
   50% {
     transform: scale(1.2);
     background-color: var(--color-node-shortest-path);
-    border: 0;
+    border: solid 1px var(--color-node-shortest-path);
   }
   85% {
     background-image: none;
   }
   99% {
-    border: 0;
+    border: solid 1px var(--color-node-shortest-path);
     background-image: none;
   }
   100% {
@@ -177,15 +177,12 @@ code {
   0% {
     transform: scale(0.6);
     background-color: var(--color-node-shortest-path);
-    border: 0;
+    border: solid 1px var(--color-node-shortest-path);
   }
   50% {
     transform: scale(1.2);
     background-color: var(--color-node-shortest-path);
-    border: 0;
-  }
-  99% {
-    border: 0;
+    border: solid 1px var(--color-node-shortest-path);
   }
   100% {
     transform: scale(1);

@@ -12,10 +12,7 @@ interface NodeState {}
 
 class Node extends React.Component<NodeProps, NodeState> {
   shouldComponentUpdate(nextProps: NodeProps) {
-    return (
-      nextProps.node.state !== this.props.node.state ||
-      nextProps.node.type != this.props.node.type
-    );
+    return nextProps.node !== this.props.node;
   }
 
   render() {

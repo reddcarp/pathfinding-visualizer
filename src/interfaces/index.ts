@@ -1,4 +1,11 @@
-type NodeTrueType = "open" | "start" | "goal" | "wall";
+type NodeTrueType =
+  | "open"
+  | "start"
+  | "goal"
+  | "wall"
+  | "weight-2"
+  | "weight-5"
+  | "weight-10";
 
 type NodeStateType =
   | "visited"

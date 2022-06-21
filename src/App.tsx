@@ -12,12 +12,16 @@ function App() {
     nodes,
     handleSelectedNodeType,
     selectedNodeType,
+    handleClearPath,
     handlePathfindingVisualization,
   } = usePathfinding(20, 40);
 
   return (
     <div className="App">
-      <Header handlePathfindingVisualization={handlePathfindingVisualization} />
+      <Header
+        handleClearPath={handleClearPath}
+        handlePathfindingVisualization={handlePathfindingVisualization}
+      />
       <StateSelector
         selectedNodeType={selectedNodeType}
         handleSelectedNodeType={handleSelectedNodeType}
