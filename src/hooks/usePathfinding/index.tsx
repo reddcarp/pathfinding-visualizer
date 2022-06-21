@@ -9,13 +9,19 @@ import {
 import { constructNodesArray } from "./helper";
 
 const usePathfinding = (rows: number, columns: number) => {
+  const INITIAL_NODES_ROW = Math.floor(rows / 2);
+  const INITIAL_START_NODE_COLUMN = Math.floor(columns / 5);
+  const INITIAL_GOAL_NODE_COLUMN = Math.floor(
+    columns - INITIAL_START_NODE_COLUMN - 1
+  );
+
   const [startNode, setStartNode] = useState<NodeType>({
-    coord: { row: 0, column: 0 },
+    coord: { row: INITIAL_NODES_ROW, column: INITIAL_START_NODE_COLUMN },
     distance: Infinity,
     type: "start",
   });
   const [goalNode, setGoalNode] = useState<NodeType>({
-    coord: { row: 0, column: columns - 1 },
+    coord: { row: INITIAL_NODES_ROW, column: INITIAL_GOAL_NODE_COLUMN },
     distance: Infinity,
     type: "goal",
   });
