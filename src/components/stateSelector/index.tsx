@@ -34,6 +34,12 @@ class StateSelector extends React.PureComponent<
           selectedNodeType={this.props.selectedNodeType}
           handleSelectedNodeType={this.props.handleSelectedNodeType}
         />
+        <Option
+          displayName="Delete"
+          stateName="open"
+          selectedNodeType={this.props.selectedNodeType}
+          handleSelectedNodeType={this.props.handleSelectedNodeType}
+        />
       </div>
     );
   }
