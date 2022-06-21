@@ -70,6 +70,7 @@ code {
   background-size: contain;
   cursor: default;
 }
+
 #node[state-type="visited"] {
   animation: visitedAnimation 1.5s ease-out forwards alternate;
 }
@@ -84,10 +85,26 @@ code {
 }
 
 #outer-node[state-type="shortest-path"] {
-  animation: shortestPath-outer 1.5s ease-out forwards alternate;
+  animation: shortestPath-outer 2s ease-out forwards alternate;
 }
 #node[state-type="shortest-path"] {
-  animation: shortestPath 1.5s ease-out forwards alternate;
+  animation: shortestPath 2s ease-out forwards alternate;
+}
+#node[state-direction="right"] {
+  background: url("../images/arrow-right.svg") center no-repeat;
+  background-size: contain;
+}
+#node[state-direction="left"] {
+  background: url("../images/arrow-left.svg") center no-repeat;
+  background-size: contain;
+}
+#node[state-direction="up"] {
+  background: url("../images/arrow-up.svg") center no-repeat;
+  background-size: contain;
+}
+#node[state-direction="down"] {
+  background: url("../images/arrow-down.svg") center no-repeat;
+  background-size: contain;
 }
 
 /******* State Selector *********/
@@ -125,22 +142,27 @@ code {
 
 @keyframes shortestPath {
   0% {
-    transform: scale(0.3);
+    transform: scale(0.6);
     background-color: var(--color-node-shortest-path);
     border: 0;
   }
-  75% {
+  50% {
     transform: scale(1.2);
     background-color: var(--color-node-shortest-path);
     border: 0;
   }
+  85% {
+    background-image: none;
+  }
   99% {
     border: 0;
+    background-image: none;
   }
   100% {
     transform: scale(1);
     background-color: var(--color-node-shortest-path);
     border: solid 1px var(--color-node-shortest-path);
+    background-image: none;
   }
 }
 

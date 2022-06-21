@@ -13,10 +13,6 @@ interface RowProps {
 interface RowState {}
 
 class Row extends React.PureComponent<RowProps, RowState> {
-  constructor(props: RowProps) {
-    super(props);
-  }
-
   render() {
     return (
       <div id="row">

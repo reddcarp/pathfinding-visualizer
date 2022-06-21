@@ -6,6 +6,8 @@ type NodeStateType =
   | "wall"
   | "shortest-path";
 
+type Direction = "up" | "down" | "left" | "right";
+
 interface CoordType {
   row: number;
   column: number;
@@ -16,6 +18,7 @@ interface NodeType {
   coord: CoordType;
   distance: number;
   previousNode?: NodeType;
+  direction?: Direction;
 }
 
 type PathfindingType = "BFS" | "Dijkstra" | "A*" | "DFS";

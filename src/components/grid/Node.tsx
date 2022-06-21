@@ -20,7 +20,11 @@ class Node extends React.Component<NodeProps, NodeState> {
     if (this.props.node.state === "goal" || this.props.node.state === "start") {
       return (
         <div id="outer-node" state-type={this.props.node.state}>
-          <div id="node" state-type={this.props.node.state}></div>
+          <div
+            id="node"
+            state-type={this.props.node.state}
+            state-direction={this.props.node.direction}
+          ></div>
         </div>
       );
     }
@@ -35,6 +39,7 @@ class Node extends React.Component<NodeProps, NodeState> {
           }
           id="node"
           state-type={this.props.node.state}
+          state-direction={this.props.node.direction}
         ></div>
       </div>
     );

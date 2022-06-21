@@ -12,10 +12,6 @@ interface GridProps {
 interface GridState {}
 
 class Grid extends React.PureComponent<GridProps, GridState> {
-  constructor(props: GridProps) {
-    super(props);
-  }
-
   render() {
     return (
       <div id="grid-container">

@@ -120,6 +120,7 @@ const usePathfinding = (rows: number, columns: number) => {
               coord: node.coord,
               state: "shortest-path",
               distance: Infinity,
+              direction: node.direction,
             };
             return newNodes;
           });

@@ -83,11 +83,25 @@ const dijkstra = (
     let currentNode: NodeType | undefined = lastNode;
     while (currentNode !== undefined) {
       shortestPathNodesInOrder.unshift(currentNode);
+
+      let nextNode = currentNode;
       currentNode = currentNode.previousNode;
+
+      // setting the direction of the node
+      // ie: where it points to (it's father)
+      if (currentNode)
+        currentNode.direction = getDirection(currentNode, nextNode);
     }
   }
 
   return [visitedNodesInOrder, shortestPathNodesInOrder];
+};
+
+const getDirection = (from: NodeType, to: NodeType) => {
+  if (from.coord.column < to.coord.column) return "right";
+  if (from.coord.column > to.coord.column) return "left";
+  if (from.coord.row < to.coord.row) return "down";
+  return "up";
 };
 
 export { dijkstra };
