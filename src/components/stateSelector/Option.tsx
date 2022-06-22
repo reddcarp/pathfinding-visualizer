@@ -5,6 +5,7 @@ interface OptionProps {
   selectedNodeType: NodeTrueType;
   stateName: NodeTrueType;
   displayName: string;
+  svgPath: string;
   handleSelectedNodeType: (state: NodeTrueType) => void;
 }
 
@@ -36,7 +37,8 @@ class Option extends React.Component<OptionProps, OptionState> {
           this.props.handleSelectedNodeType(this.props.stateName);
         }}
       >
-        {this.props.displayName}
+        <img src={this.props.svgPath} />
+        <text>{this.props.displayName}</text>
       </div>
     );
   }
