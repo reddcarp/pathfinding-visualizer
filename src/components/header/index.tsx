@@ -1,5 +1,6 @@
 import React from "react";
 import { NodeTrueType, PathfindingType } from "../../interfaces";
+import Action from "./Action";
 
 interface HeaderProps {
   handlePathfindingVisualization: (algo: PathfindingType) => void;
@@ -17,26 +18,35 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   render() {
     return (
       <div id="header">
-        <button
-          onClick={() => this.props.handlePathfindingVisualization("Dijkstra")}
-        >
-          Launch function
-        </button>
-        <button onClick={() => this.props.handleClearPath()}>Clear path</button>
-        <button onClick={() => this.props.handleClearNodesByType(["wall"])}>
-          Clear walls
-        </button>
-        <button
-          onClick={() =>
+        <b id="header-title">Pathfinding visualizer</b>
+        <Action
+          actionToPerform={() =>
+            this.props.handlePathfindingVisualization("Dijkstra")
+          }
+          displayedName="Visualize Dijkstra"
+        />
+        <Action
+          actionToPerform={() => this.props.handleClearPath()}
+          displayedName="Clear Path"
+        />
+        <Action
+          actionToPerform={() => this.props.handleClearNodesByType(["wall"])}
+          displayedName="Clear walls"
+        />
+        <Action
+          actionToPerform={() =>
             this.props.handleClearNodesByType([
               "weight-2",
               "weight-5",
               "weight-10",
             ])
           }
-        >
-          Clear weights
-        </button>
+          displayedName="Clear weights"
+        />
+        <div id="header-end">
+          <Action actionToPerform={() => null} displayedName="Info" />
+          <Action actionToPerform={() => null} displayedName="Help" />
+        </div>
       </div>
     );
   }

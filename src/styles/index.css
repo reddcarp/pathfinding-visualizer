@@ -20,12 +20,13 @@ body {
   --type-selector-width: 137px;
   --color-type-selector-unselected: transparent;
   --color-type-selector-unselected-hover: #272729;
-  --color-type-selector-unselected-clicked: #757272;
+  --color-type-selector-unselected-clicked: #2f2f34;
   --color-type-selector-selected: #4b4b4b;
   --color-type-selector-selected-hover: #4b4b4b;
-  --color-type-selector-selected-clicked: #757272;
+  --color-type-selector-selected-clicked: #2f2f34;
 
   /* Header */
+  --color-header: #20232a;
   --color-header-option: var(--color-text);
   --color-header-option-hover: #61dafb;
 
@@ -56,10 +57,11 @@ code {
 }
 
 #grid {
-  width: fit-content;
+  display: grid;
 }
 
 #row {
+  flex: 1;
   display: flex;
 }
 
@@ -68,6 +70,7 @@ code {
 }
 #node {
   cursor: pointer;
+  flex: 1;
   height: var(--node-size);
   width: var(--node-size);
 }
@@ -167,12 +170,53 @@ code {
   animation: shortestPathWeight10 2s ease-out forwards alternate;
 }
 
+/******* Header *********/
+#header {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 28px 15px;
+  align-items: center;
+  background-color: var(--color-header);
+}
+#header-end {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 20px;
+}
+#header-title {
+  font-style: normal;
+  text-align: center;
+  font-size: 20px;
+  margin-right: 50px;
+}
+
+#action {
+  cursor: pointer;
+  color: var(--color-header-option);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+  font-size: 15px;
+}
+#action:hover {
+  color: var(--color-header-option-hover);
+}
+
 /******* State Selector *********/
 #state-selector-container {
   display: flex;
   flex-direction: row;
 }
 #state-toggle {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 14px;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -182,7 +226,7 @@ code {
   color: var(--color-text);
   height: var(--type-selector-height);
   width: var(--type-selector-width);
-  gap: 9px;
+  gap: 5px;
   border-radius: 10px;
 }
 #state-toggle:hover {

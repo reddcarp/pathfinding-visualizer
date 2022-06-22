@@ -37,7 +37,7 @@ class StateSelector extends React.Component<
         />
         <Option
           displayName="Wall Node"
-          svgPath="images/arrow-down.svg"
+          svgPath="images/wall.svg"
           stateName="wall"
           selectedNodeType={this.props.selectedNodeType}
           handleSelectedNodeType={this.props.handleSelectedNodeType}
@@ -55,7 +55,7 @@ class StateSelector extends React.Component<
         />
         <Option
           displayName="Erase Nodes"
-          svgPath="images/arrow-down.svg"
+          svgPath="images/eraser.svg"
           stateName="open"
           selectedNodeType={this.props.selectedNodeType}
           handleSelectedNodeType={this.props.handleSelectedNodeType}
