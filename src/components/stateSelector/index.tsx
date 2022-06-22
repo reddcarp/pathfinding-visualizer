@@ -23,34 +23,39 @@ class StateSelector extends React.Component<
       <div id="state-selector-container">
         <Option
           displayName="Start Node"
-          svgPath="../../images/arrow-right.svg"
+          svgPath="images/arrow-right.svg"
           stateName="start"
           selectedNodeType={this.props.selectedNodeType}
           handleSelectedNodeType={this.props.handleSelectedNodeType}
         />
         <Option
           displayName="Goal Node"
-          svgPath="../../images/target.svg"
+          svgPath="images/target.svg"
           stateName="goal"
           selectedNodeType={this.props.selectedNodeType}
           handleSelectedNodeType={this.props.handleSelectedNodeType}
         />
         <Option
           displayName="Wall Node"
-          svgPath="../../images/arrow-down.svg"
+          svgPath="images/arrow-down.svg"
           stateName="wall"
           selectedNodeType={this.props.selectedNodeType}
           handleSelectedNodeType={this.props.handleSelectedNodeType}
         />
         <MultiOption
           displayNames={["Weight Node", "Weight Node", "Weight Node"]}
+          svgPaths={[
+            "images/weight-2.svg",
+            "images/weight-5.svg",
+            "images/weight-10.svg",
+          ]}
           stateNames={["weight-2", "weight-5", "weight-10"]}
           selectedNodeType={this.props.selectedNodeType}
           handleSelectedNodeType={this.props.handleSelectedNodeType}
         />
         <Option
           displayName="Erase Nodes"
-          svgPath="../../images/arrow-down.svg"
+          svgPath="images/arrow-down.svg"
           stateName="open"
           selectedNodeType={this.props.selectedNodeType}
           handleSelectedNodeType={this.props.handleSelectedNodeType}

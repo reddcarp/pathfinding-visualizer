@@ -1,10 +1,13 @@
 import React from "react";
+import { ReactSVG } from "react-svg";
+
 import { NodeTrueType } from "../../interfaces";
 
 interface MultiOptionProps {
   selectedNodeType: NodeTrueType;
   stateNames: NodeTrueType[];
   displayNames: string[];
+  svgPaths: string[];
   handleSelectedNodeType: (state: NodeTrueType) => void;
 }
 
@@ -74,6 +77,7 @@ class MultiOption extends React.Component<MultiOptionProps, MultiOptionState> {
           );
         }}
       >
+        <ReactSVG src={this.props.svgPaths[this.state.index]} />
         {this.props.displayNames[this.state.index]}
       </div>
     );

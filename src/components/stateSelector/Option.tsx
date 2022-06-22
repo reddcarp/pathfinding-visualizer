@@ -1,5 +1,6 @@
 import React from "react";
 import { NodeTrueType } from "../../interfaces";
+import { ReactSVG } from "react-svg";
 
 interface OptionProps {
   selectedNodeType: NodeTrueType;
@@ -37,8 +38,8 @@ class Option extends React.Component<OptionProps, OptionState> {
           this.props.handleSelectedNodeType(this.props.stateName);
         }}
       >
-        <img src={this.props.svgPath} />
-        <text>{this.props.displayName}</text>
+        <ReactSVG src={this.props.svgPath} />
+        {this.props.displayName}
       </div>
     );
   }
