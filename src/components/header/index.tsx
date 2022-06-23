@@ -1,11 +1,12 @@
 import React from "react";
-import { NodeTrueType, PathfindingType } from "../../interfaces";
+import { MazeType, NodeTrueType, PathfindingType } from "../../interfaces";
 import Action from "./Action";
 
 interface HeaderProps {
   handlePathfindingVisualization: (algo: PathfindingType) => void;
   handleClearPath: () => void;
   handleClearNodesByType: (nodeTypes: NodeTrueType[]) => void;
+  handleGenerateMaze: (algo: MazeType) => void;
 }
 
 interface HeaderState {}
@@ -24,6 +25,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             this.props.handlePathfindingVisualization("Dijkstra")
           }
           displayedName="Visualize Dijkstra"
+        />
+        <Action
+          actionToPerform={() =>
+            this.props.handleGenerateMaze("Recursive-division")
+          }
+          displayedName="Generate Maze"
         />
         <Action
           actionToPerform={() => this.props.handleClearPath()}

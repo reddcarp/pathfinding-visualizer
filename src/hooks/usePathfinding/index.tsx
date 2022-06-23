@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { dijkstra } from "../../algorithms/dijkstra";
+import { recursiveMazeGeneration } from "../../algorithms/maze";
 import {
   CoordType,
+  MazeType,
   NodeTrueType,
   NodeType,
   PathfindingType,
@@ -230,6 +232,46 @@ const usePathfinding = (rows: number, columns: number) => {
     handleClearPath(launchAppropriateVisualization(algo));
   };
 
+  const visualizeMazeGeneration = (mazeWallsInOrder: CoordType[]) => {
+    const timeBetweenWalls = 40;
+    console.log(mazeWallsInOrder);
+
+    mazeWallsInOrder.forEach((coord, idx) => {
+      setTimeout(() => {
+        setNodes((prev) => {
+          let newNodes = [...prev];
+          newNodes[coord.row][coord.column] = {
+            coord: {
+              column: coord.column,
+              row: coord.row,
+            },
+            distance: Infinity,
+            type: "wall",
+            weight: 1,
+          };
+          return newNodes;
+        });
+      }, timeBetweenWalls * idx);
+    });
+  };
+  const launchMazeVisualization = (algo: MazeType) => {
+    switch (algo) {
+      case "Recursive-division":
+        const mazeWallsInOrder = recursiveMazeGeneration(
+          nodes,
+          startNode,
+          goalNode
+        );
+        visualizeMazeGeneration(mazeWallsInOrder);
+        break;
+      default:
+        break;
+    }
+  };
+  const handleGenerateMaze = (algo: MazeType) => {
+    launchMazeVisualization(algo);
+  };
+
   return {
     handleMouseDown,
     handleMouseUp,
@@ -240,6 +282,7 @@ const usePathfinding = (rows: number, columns: number) => {
     handleClearPath,
     handlePathfindingVisualization,
     handleClearNodesByType,
+    handleGenerateMaze,
   };
 };
 

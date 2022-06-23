@@ -15,6 +15,7 @@ function App() {
     handleClearPath,
     handlePathfindingVisualization,
     handleClearNodesByType,
+    handleGenerateMaze,
   } = usePathfinding(20, 44);
 
   return (
@@ -23,6 +24,7 @@ function App() {
         handleClearPath={handleClearPath}
         handlePathfindingVisualization={handlePathfindingVisualization}
         handleClearNodesByType={handleClearNodesByType}
+        handleGenerateMaze={handleGenerateMaze}
       />
       <StateSelector
         selectedNodeType={selectedNodeType}
