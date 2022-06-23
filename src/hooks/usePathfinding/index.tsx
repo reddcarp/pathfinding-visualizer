@@ -112,20 +112,40 @@ const usePathfinding = (rows: number, columns: number) => {
     visitedNodesInOrder: NodeType[],
     shortestPathNodesInOrder: NodeType[]
   ) => {
+    // time during which the looking state is displayed
+    let lookingTime = 5;
+    // time between visited nodes' animation
+    let animationTimeBetween = 5;
+    // time between shortest path nodes' animation
+    let shortestPathAnimationTimeBetween = 50;
+
     visitedNodesInOrder.forEach((node, idx) => {
       setTimeout(() => {
         setNodes((prev) => {
           let newNodes = [...prev];
           newNodes[node.coord.row][node.coord.column] = {
             coord: node.coord,
-            state: "visited",
+            state: "looking",
             distance: Infinity,
             type: node.type,
             weight: node.weight,
           };
           return newNodes;
         });
-      }, 10 * idx);
+        setTimeout(() => {
+          setNodes((prev) => {
+            let newNodes = [...prev];
+            newNodes[node.coord.row][node.coord.column] = {
+              coord: node.coord,
+              state: "visited",
+              distance: Infinity,
+              type: node.type,
+              weight: node.weight,
+            };
+            return newNodes;
+          });
+        }, lookingTime);
+      }, (animationTimeBetween + lookingTime) * idx);
     });
 
     // shortest path animation
@@ -144,9 +164,9 @@ const usePathfinding = (rows: number, columns: number) => {
             };
             return newNodes;
           });
-        }, 50 * idx);
+        }, shortestPathAnimationTimeBetween * idx);
       });
-    }, 10 * visitedNodesInOrder.length);
+    }, (animationTimeBetween + lookingTime) * visitedNodesInOrder.length);
   };
 
   const handleClearNodesByType = (nodeTypes: NodeTrueType[]) => {

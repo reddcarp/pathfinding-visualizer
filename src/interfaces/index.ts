@@ -14,6 +14,7 @@ type NodeStateType =
   | "shortest-path-weight-2"
   | "shortest-path-weight-5"
   | "shortest-path-weight-10"
+  | "looking"
   | undefined;
 
 type Direction = "up" | "down" | "left" | "right";

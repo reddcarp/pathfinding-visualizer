@@ -30,9 +30,8 @@ body {
   --color-header-option: var(--color-text);
   --color-header-option-hover: #61dafb;
 
-  --color-node-visited-from: #3a417e;
-  --color-node-visited-to: #5ac9e0;
-  --color-node-looking: rgb(248, 235, 54);
+  /* Node */
+  --color-node-looking: #f8eb36;
   --color-node-wall: #8a8a8a;
   --color-node-shortest-path: #fffe6a;
 
@@ -107,6 +106,9 @@ code {
   animation: plop 0.9s ease-out forwards alternate;
 }
 
+#node[state-type="looking"] {
+  background-color: var(--color-node-looking);
+}
 #node[state-type="visited"] {
   animation: visitedAnimation 1.5s ease-out forwards alternate;
 }
@@ -159,7 +161,6 @@ code {
 #node[state-type="shortest-path-special"] {
   animation: shortestPathSpecial 2s ease-out forwards alternate;
 }
-
 #node[state-type="shortest-path-weight-2"] {
   animation: shortestPathWeight2 2s ease-out forwards alternate;
 }
@@ -278,9 +279,12 @@ code {
   }
   85% {
     background-image: none;
+    background-color: var(--color-node-shortest-path);
+    border: solid 1px var(--color-node-shortest-path);
   }
   99% {
     border: solid 1px var(--color-node-shortest-path);
+    background-color: var(--color-node-shortest-path);
     background-image: none;
   }
   100% {
@@ -368,21 +372,6 @@ code {
     background-color: var(--color-node-shortest-path);
     border: solid 1px var(--color-node-shortest-path);
     background-image: url("../images/weight-10.svg");
-  }
-}
-
-@keyframes shortestPath-outer {
-  0% {
-    border: solid 1px transparent;
-    background-color: transparent;
-  }
-  99% {
-    border: solid 1px transparent;
-    background-color: transparent;
-  }
-  100% {
-    border: 0;
-    background-color: transparent;
   }
 }
 
