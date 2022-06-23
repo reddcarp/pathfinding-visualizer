@@ -16,8 +16,11 @@ const getAllNodes = (nodes: NodeType[][]) => {
 const updateUnvisitedNeighbors = (node: NodeType, nodes: NodeType[][]) => {
   const unvisitedNeighbors = getUnvisitedNeighbors(nodes, node);
   unvisitedNeighbors.forEach((neighbor) => {
-    neighbor.distance = node.distance + neighbor.weight;
-    neighbor.previousNode = node;
+    let tempDistance = node.distance + neighbor.weight;
+    if (tempDistance < neighbor.distance) {
+      neighbor.distance = tempDistance;
+      neighbor.previousNode = node;
+    }
   });
 };
 
