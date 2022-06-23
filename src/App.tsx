@@ -15,7 +15,7 @@ function App() {
     handleClearPath,
     handlePathfindingVisualization,
     handleClearNodesByType,
-  } = usePathfinding(20, 40);
+  } = usePathfinding(20, 44);
 
   return (
     <div className="App">

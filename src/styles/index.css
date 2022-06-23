@@ -36,7 +36,7 @@ body {
   --color-node-wall: #8a8a8a;
   --color-node-shortest-path: #fffe6a;
 
-  --node-size: 30px;
+  --node-size: calc(100vw / 44 - (2.5px));
 }
 
 #root {
