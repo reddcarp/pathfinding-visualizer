@@ -171,7 +171,10 @@ const usePathfinding = (rows: number, columns: number) => {
     }, (animationTimeBetween + lookingTime) * visitedNodesInOrder.length);
   };
 
-  const handleClearNodesByType = (nodeTypes: NodeTrueType[]) => {
+  const handleClearNodesByType = (
+    nodeTypes: NodeTrueType[],
+    callback?: any
+  ) => {
     setNodes((prev) => {
       const newNodes = [...prev];
 
@@ -188,6 +191,7 @@ const usePathfinding = (rows: number, columns: number) => {
         });
       });
 
+      if (callback) callback();
       return newNodes;
     });
   };
@@ -212,6 +216,17 @@ const usePathfinding = (rows: number, columns: number) => {
       return newNodes;
     });
   };
+  const handleClearAll = (callback?: any) => {
+    handleClearPath(() =>
+      handleClearNodesByType(
+        ["wall", "weight-2", "weight-5", "weight-10"],
+        () => {
+          if (callback) callback();
+        }
+      )
+    );
+  };
+
   const launchAppropriateVisualization = (algo: PathfindingType) => {
     setTimeout(() => {
       switch (algo) {
@@ -233,25 +248,26 @@ const usePathfinding = (rows: number, columns: number) => {
   };
 
   const visualizeMazeGeneration = (mazeWallsInOrder: CoordType[]) => {
-    const timeBetweenWalls = 10;
-    console.log(mazeWallsInOrder);
+    handleClearAll(() => {
+      const timeBetweenWalls = 10;
 
-    mazeWallsInOrder.forEach((coord, idx) => {
-      setTimeout(() => {
-        setNodes((prev) => {
-          let newNodes = [...prev];
-          newNodes[coord.row][coord.column] = {
-            coord: {
-              column: coord.column,
-              row: coord.row,
-            },
-            distance: Infinity,
-            type: "wall",
-            weight: 1,
-          };
-          return newNodes;
-        });
-      }, timeBetweenWalls * idx);
+      mazeWallsInOrder.forEach((coord, idx) => {
+        setTimeout(() => {
+          setNodes((prev) => {
+            let newNodes = [...prev];
+            newNodes[coord.row][coord.column] = {
+              coord: {
+                column: coord.column,
+                row: coord.row,
+              },
+              distance: Infinity,
+              type: "wall",
+              weight: 1,
+            };
+            return newNodes;
+          });
+        }, timeBetweenWalls * idx);
+      });
     });
   };
   const launchMazeVisualization = (algo: MazeType) => {
