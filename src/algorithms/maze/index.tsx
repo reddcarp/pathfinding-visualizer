@@ -9,8 +9,14 @@ const recursiveMazeGeneration = (
   const wallsInOrder: CoordType[] = [];
   _recursiveMazeGeneration(
     wallsInOrder,
-    { row: nodes.length, column: nodes[0].length },
-    { row: 0, column: 0 }
+    0,
+    nodes.length,
+    0,
+    nodes[0].length,
+    "vertical",
+    true,
+    nodes[0].length,
+    nodes.length
   );
   return wallsInOrder.filter((coord) => {
     if (
@@ -29,89 +35,209 @@ const recursiveMazeGeneration = (
 
 const _recursiveMazeGeneration = (
   wallsInOrder: CoordType[],
-  boxSize: CoordType,
-  offset: CoordType
+  rowStart: number,
+  rowEnd: number,
+  colStart: number,
+  colEnd: number,
+  orientation: "horizontal" | "vertical",
+  surroundingWalls: boolean,
+  maxCol: number,
+  maxRow: number
 ) => {
-  const row = boxSize.row;
-  const column = boxSize.column;
+  if (rowEnd < rowStart || colEnd < colStart) {
+    return;
+  }
 
-  // can't place a whale if there is only 2 nodes of width
-  // that would mean two walls back to back
-  if (row < 2 || column < 2) return;
+  if (!surroundingWalls) {
+  }
 
-  const isHorizontal = determineIsHorizontal(column, row);
-  // const isHorizontal = false;
-
-  // starting coord of where the wall will be drawn from
-  const wallCoord = { column: offset.column, row: offset.row };
-  if (isHorizontal) wallCoord.row += randomInRange(0, row - 1);
-  else wallCoord.column += randomInRange(0, column - 1);
-
-  const holeCoord: CoordType = { column: wallCoord.column, row: wallCoord.row };
-  if (isHorizontal) holeCoord.column += randomInRange(0, column - 1);
-  else holeCoord.row += randomInRange(0, row - 1);
-
-  const dir = isHorizontal ? 1 : 2;
-
-  const wallLength = isHorizontal ? column : row;
-  const drawDirection = isHorizontal
-    ? { column: 1, row: 0 }
-    : { column: 0, row: 1 };
-
-  buildWall(wallsInOrder, wallCoord, drawDirection, wallLength, holeCoord);
-
-  // first recursion (top/left portion)
-  let newOffset = { column: offset.column, row: offset.row };
-  let newBoxSize = isHorizontal
-    ? { column: column, row: wallCoord.row - (offset.row + 1) }
-    : { column: wallCoord.column - (offset.column + 1), row: row };
-  _recursiveMazeGeneration(wallsInOrder, newBoxSize, newOffset);
-
-  // second recursion(bottom/right portion)
-  newOffset = isHorizontal
-    ? { column: offset.column, row: wallCoord.row + 1 }
-    : { column: wallCoord.column + 1, row: offset.row };
-  newBoxSize = isHorizontal
-    ? { column: column, row: offset.row + row - wallCoord.row - 1 }
-    : { column: offset.column + column - wallCoord.column - 1, row: row };
-  _recursiveMazeGeneration(wallsInOrder, newBoxSize, newOffset);
-};
-
-const determineIsHorizontal = (column: number, row: number) => {
-  if (column < row) return true;
-  else if (row < column) return false;
-  return Math.random() > 0.5;
-};
-
-const randomInRange = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-const buildWall = (
-  wallsInOrder: CoordType[],
-  wallCoord: CoordType,
-  drawDirection: CoordType,
-  wallLength: number,
-  holeCoord: CoordType
-) => {
-  for (let i = 0; i < wallLength; i++) {
-    // we skip where the hole is supposed to be
-    if (
-      wallCoord.column === holeCoord.column &&
-      wallCoord.row === holeCoord.row
-    ) {
-      wallCoord = {
-        column: wallCoord.column + drawDirection.column,
-        row: wallCoord.row + drawDirection.row,
-      };
-      continue;
+  // drawing the horizontal wall
+  if (orientation === "horizontal") {
+    let possibleRows: number[] = [];
+    for (let number = rowStart; number <= rowEnd; number += 2) {
+      possibleRows.push(number);
     }
 
-    wallsInOrder.push(wallCoord);
-    wallCoord = {
-      column: wallCoord.column + drawDirection.column,
-      row: wallCoord.row + drawDirection.row,
-    };
+    let possibleCols: number[] = [];
+    for (let number = colStart - 1; number <= colEnd + 1; number += 2) {
+      possibleCols.push(number);
+    }
+
+    let randomRowIndex = Math.floor(Math.random() * possibleRows.length);
+    let randomColIndex = Math.floor(Math.random() * possibleCols.length);
+    let currentRow = possibleRows[randomRowIndex];
+    let colRandom = possibleCols[randomColIndex];
+
+    drawHorizontalWall(
+      wallsInOrder,
+      currentRow,
+      colRandom,
+      colStart,
+      colEnd,
+      maxCol
+    );
+
+    if (currentRow - 2 - rowStart > colEnd - colStart) {
+      _recursiveMazeGeneration(
+        wallsInOrder,
+        rowStart,
+        currentRow - 2,
+        colStart,
+        colEnd,
+        orientation,
+        surroundingWalls,
+        maxCol,
+        maxRow
+      );
+    } else {
+      _recursiveMazeGeneration(
+        wallsInOrder,
+        rowStart,
+        currentRow - 2,
+        colStart,
+        colEnd,
+        "vertical",
+        surroundingWalls,
+        maxCol,
+        maxRow
+      );
+    }
+    if (rowEnd - (currentRow + 2) > colEnd - colStart) {
+      _recursiveMazeGeneration(
+        wallsInOrder,
+        currentRow + 2,
+        rowEnd,
+        colStart,
+        colEnd,
+        orientation,
+        surroundingWalls,
+        maxCol,
+        maxRow
+      );
+    } else {
+      _recursiveMazeGeneration(
+        wallsInOrder,
+        currentRow + 2,
+        rowEnd,
+        colStart,
+        colEnd,
+        "vertical",
+        surroundingWalls,
+        maxCol,
+        maxRow
+      );
+    }
+  } else {
+    let possibleCols = [];
+    for (let number = colStart; number <= colEnd; number += 2) {
+      possibleCols.push(number);
+    }
+
+    let possibleRows = [];
+    for (let number = rowStart - 1; number <= rowEnd + 1; number += 2) {
+      possibleRows.push(number);
+    }
+
+    let randomColIndex = Math.floor(Math.random() * possibleCols.length);
+    let randomRowIndex = Math.floor(Math.random() * possibleRows.length);
+    let currentCol = possibleCols[randomColIndex];
+    let rowRandom = possibleRows[randomRowIndex];
+
+    drawVerticalWall(
+      wallsInOrder,
+      currentCol,
+      rowRandom,
+      rowStart,
+      rowEnd,
+      maxRow
+    );
+
+    return;
+
+    if (rowEnd - rowStart > currentCol - 2 - colStart) {
+      _recursiveMazeGeneration(
+        wallsInOrder,
+        rowStart,
+        rowEnd,
+        colStart,
+        currentCol - 2,
+        "horizontal",
+        surroundingWalls,
+        maxCol,
+        maxRow
+      );
+    } else {
+      _recursiveMazeGeneration(
+        wallsInOrder,
+        rowStart,
+        rowEnd,
+        colStart,
+        currentCol - 2,
+        orientation,
+        surroundingWalls,
+        maxCol,
+        maxRow
+      );
+    }
+    if (rowEnd - rowStart > colEnd - (currentCol + 2)) {
+      _recursiveMazeGeneration(
+        wallsInOrder,
+        rowStart,
+        rowEnd,
+        currentCol + 2,
+        colEnd,
+        "horizontal",
+        surroundingWalls,
+        maxCol,
+        maxRow
+      );
+    } else {
+      _recursiveMazeGeneration(
+        wallsInOrder,
+        rowStart,
+        rowEnd,
+        currentCol + 2,
+        colEnd,
+        orientation,
+        surroundingWalls,
+        maxCol,
+        maxRow
+      );
+    }
+  }
+};
+
+const drawHorizontalWall = (
+  wallsInOrder: CoordType[],
+  wallIdx: number,
+  pathIdx: number,
+  colStart: number,
+  colEnd: number,
+  maxCol: number
+) => {
+  const trueColStart = colStart === 0 ? colStart : colStart - 1;
+  const trueColEnd = colEnd === maxCol ? colEnd - 1 : colEnd + 1;
+
+  for (let i = trueColStart; i <= trueColEnd; i++) {
+    if (i === pathIdx) continue;
+    wallsInOrder.push({ column: i, row: wallIdx });
+  }
+};
+
+const drawVerticalWall = (
+  wallsInOrder: CoordType[],
+  wallIdx: number,
+  pathIdx: number,
+  rowStart: number,
+  rowEnd: number,
+  maxRow: number
+) => {
+  const trueRowStart = rowStart === 0 ? rowStart : rowStart - 1;
+  const trueRowEnd = rowEnd === maxRow ? rowEnd - 1 : rowEnd + 1;
+
+  for (let i = trueRowStart; i <= trueRowEnd; i++) {
+    if (i === pathIdx) continue;
+    wallsInOrder.push({ column: wallIdx, row: i });
   }
 };
 

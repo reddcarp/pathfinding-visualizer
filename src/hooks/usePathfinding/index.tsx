@@ -233,7 +233,7 @@ const usePathfinding = (rows: number, columns: number) => {
   };
 
   const visualizeMazeGeneration = (mazeWallsInOrder: CoordType[]) => {
-    const timeBetweenWalls = 40;
+    const timeBetweenWalls = 10;
     console.log(mazeWallsInOrder);
 
     mazeWallsInOrder.forEach((coord, idx) => {
