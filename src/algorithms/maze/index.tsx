@@ -9,12 +9,12 @@ const recursiveMazeGeneration = (
   const wallsInOrder: CoordType[] = [];
   _recursiveMazeGeneration(
     wallsInOrder,
-    0,
-    nodes.length,
-    0,
-    nodes[0].length,
+    2,
+    nodes.length - 3,
+    2,
+    nodes[0].length - 3,
     "vertical",
-    true,
+    false,
     nodes[0].length,
     nodes.length
   );
@@ -49,6 +49,31 @@ const _recursiveMazeGeneration = (
   }
 
   if (!surroundingWalls) {
+    // top row
+    let row = 0;
+    for (let col = 0; col < maxCol; col++) {
+      wallsInOrder.push({ column: col, row: row });
+    }
+
+    // right col
+    let col = maxCol - 1;
+    for (row = 0; row < maxRow; row++) {
+      wallsInOrder.push({ column: col, row: row });
+    }
+
+    // bottom row
+    row = maxRow - 1;
+    for (col = maxCol - 1; col >= 0; col--) {
+      wallsInOrder.push({ column: col, row: row });
+    }
+
+    // left col
+    col = 0;
+    for (row = maxRow - 1; row >= 0; row--) {
+      wallsInOrder.push({ column: col, row: row });
+    }
+
+    surroundingWalls = true;
   }
 
   // drawing the horizontal wall
@@ -151,8 +176,6 @@ const _recursiveMazeGeneration = (
       rowEnd,
       maxRow
     );
-
-    return;
 
     if (rowEnd - rowStart > currentCol - 2 - colStart) {
       _recursiveMazeGeneration(
