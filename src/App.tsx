@@ -16,7 +16,7 @@ function App() {
     handlePathfindingVisualization,
     handleClearNodesByType,
     handleGenerateMaze,
-  } = usePathfinding(19, 43);
+  } = usePathfinding(23, 55);
 
   return (
     <div className="App">
