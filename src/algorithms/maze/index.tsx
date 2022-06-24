@@ -13,7 +13,7 @@ const recursiveMazeGeneration = (
     nodes.length - 3,
     2,
     nodes[0].length - 3,
-    "vertical",
+    Math.random() > 0.5 ? "horizontal" : "vertical",
     false,
     nodes[0].length,
     nodes.length
