@@ -51,7 +51,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           displayedName="Clear weights"
         />
         <div id="header-end">
-          <Action actionToPerform={() => null} displayedName="Info" />
           <Action actionToPerform={() => null} displayedName="Help" />
         </div>
       </div>
