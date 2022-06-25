@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/pathfinding-visualizer/static/css/main.ce897d1d.css",
+    "main.js": "/pathfinding-visualizer/static/js/main.76c5b137.js",
+    "static/js/787.ef103b65.chunk.js": "/pathfinding-visualizer/static/js/787.ef103b65.chunk.js",
+    "static/media/WallPlacement.gif": "/pathfinding-visualizer/static/media/WallPlacement.d0b67bfe60069ad5e9f2.gif",
+    "static/media/WeightChange.gif": "/pathfinding-visualizer/static/media/WeightChange.8e276188a8836056681c.gif",
+    "static/media/weight-10.svg": "/pathfinding-visualizer/static/media/weight-10.4e1c0cce725ca2802051.svg",
+    "static/media/weight-5.svg": "/pathfinding-visualizer/static/media/weight-5.c9b45c06ea98886e47f6.svg",
+    "static/media/weight-2.svg": "/pathfinding-visualizer/static/media/weight-2.32224efcbc39158cb149.svg",
+    "static/media/arrow-right.svg": "/pathfinding-visualizer/static/media/arrow-right.e9b4a3d9a0f31805c24c.svg",
+    "static/media/arrow-up.svg": "/pathfinding-visualizer/static/media/arrow-up.7aecebc9fbd4193bee6e.svg",
+    "static/media/arrow-down.svg": "/pathfinding-visualizer/static/media/arrow-down.936f062df2c4a6a32318.svg",
+    "static/media/arrow-left.svg": "/pathfinding-visualizer/static/media/arrow-left.9f62facf066c09d7e354.svg",
+    "index.html": "/pathfinding-visualizer/index.html",
+    "static/media/target.svg": "/pathfinding-visualizer/static/media/target.2011b0837060414de747.svg",
+    "main.ce897d1d.css.map": "/pathfinding-visualizer/static/css/main.ce897d1d.css.map",
+    "main.76c5b137.js.map": "/pathfinding-visualizer/static/js/main.76c5b137.js.map",
+    "787.ef103b65.chunk.js.map": "/pathfinding-visualizer/static/js/787.ef103b65.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ce897d1d.css",
+    "static/js/main.76c5b137.js"
+  ]
+}
