@@ -36,6 +36,7 @@ const usePathfinding = (rows: number, columns: number) => {
   const [selectedNodeType, setSelectedNodeType] =
     useState<NodeTrueType>("start");
   const [isMousePressed, setIsMousePressed] = useState(false);
+  const [isAnimationProcessing, setIsAnimationProcessing] = useState(false);
 
   const handleSelectedNodeType = (type: NodeTrueType) => {
     setSelectedNodeType(type);
@@ -60,6 +61,7 @@ const usePathfinding = (rows: number, columns: number) => {
     }
   };
   const handleNodeChange = (coord: CoordType) => {
+    if (isAnimationProcessing) return;
     const typeSplit = selectedNodeType.split("-");
     const weight = typeSplit[0] === "weight" ? parseInt(typeSplit[1]) : 1;
 
@@ -169,12 +171,20 @@ const usePathfinding = (rows: number, columns: number) => {
         }, shortestPathAnimationTimeBetween * idx);
       });
     }, (animationTimeBetween + lookingTime) * visitedNodesInOrder.length);
+
+    // animation done
+    setTimeout(
+      () => setIsAnimationProcessing(false),
+      (animationTimeBetween + lookingTime) * visitedNodesInOrder.length +
+        shortestPathAnimationTimeBetween * shortestPathNodesInOrder.length
+    );
   };
 
   const handleClearNodesByType = (
     nodeTypes: NodeTrueType[],
     callback?: any
   ) => {
+    if (isAnimationProcessing) return;
     setNodes((prev) => {
       const newNodes = [...prev];
 
@@ -196,6 +206,7 @@ const usePathfinding = (rows: number, columns: number) => {
     });
   };
   const handleClearPath = (callback?: any) => {
+    if (isAnimationProcessing) return;
     setNodes((prev) => {
       const newNodes = [...prev];
 
@@ -217,6 +228,7 @@ const usePathfinding = (rows: number, columns: number) => {
     });
   };
   const handleClearAll = (callback?: any) => {
+    if (isAnimationProcessing) return;
     handleClearPath(() =>
       handleClearNodesByType(
         ["wall", "weight-2", "weight-5", "weight-10"],
@@ -229,6 +241,7 @@ const usePathfinding = (rows: number, columns: number) => {
 
   const launchAppropriateVisualization = (algo: PathfindingType) => {
     setTimeout(() => {
+      setIsAnimationProcessing(true);
       switch (algo) {
         case "Dijkstra":
           const [visitedNodesInOrder, shortestPathNodesInOrder] = dijkstra(
@@ -244,11 +257,13 @@ const usePathfinding = (rows: number, columns: number) => {
     }, 10);
   };
   const handlePathfindingVisualization = (algo: PathfindingType) => {
+    if (isAnimationProcessing) return;
     handleClearPath(launchAppropriateVisualization(algo));
   };
 
   const visualizeMazeGeneration = (mazeWallsInOrder: CoordType[]) => {
     handleClearAll(() => {
+      setIsAnimationProcessing(true);
       const timeBetweenWalls = 10;
 
       mazeWallsInOrder.forEach((coord, idx) => {
@@ -268,6 +283,12 @@ const usePathfinding = (rows: number, columns: number) => {
           });
         }, timeBetweenWalls * idx);
       });
+
+      // animation done
+      setTimeout(
+        () => setIsAnimationProcessing(false),
+        timeBetweenWalls * mazeWallsInOrder.length
+      );
     });
   };
   const launchMazeVisualization = (algo: MazeType) => {
@@ -285,6 +306,7 @@ const usePathfinding = (rows: number, columns: number) => {
     }
   };
   const handleGenerateMaze = (algo: MazeType) => {
+    if (isAnimationProcessing) return;
     launchMazeVisualization(algo);
   };
 
@@ -299,6 +321,7 @@ const usePathfinding = (rows: number, columns: number) => {
     handlePathfindingVisualization,
     handleClearNodesByType,
     handleGenerateMaze,
+    isAnimationProcessing,
   };
 };
 
