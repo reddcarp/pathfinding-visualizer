@@ -26,7 +26,9 @@ function App() {
   return (
     <div className="App">
       {isAnimationProcessing && <Toast message="Processing animation" />}
-      {showTutorial && <Modal handleSetShowTutorial={handleSetShowTutorial} />}
+      {showTutorial.showTutorial != "false" && (
+        <Modal handleSetShowTutorial={handleSetShowTutorial} />
+      )}
       <Header
         handleClearPath={handleClearPath}
         handlePathfindingVisualization={handlePathfindingVisualization}

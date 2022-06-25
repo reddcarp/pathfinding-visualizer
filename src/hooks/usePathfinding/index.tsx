@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import { dijkstra } from "../../algorithms/dijkstra";
 import { recursiveMazeGeneration } from "../../algorithms/maze";
 import {
@@ -37,10 +38,19 @@ const usePathfinding = (rows: number, columns: number) => {
     useState<NodeTrueType>("start");
   const [isMousePressed, setIsMousePressed] = useState(false);
   const [isAnimationProcessing, setIsAnimationProcessing] = useState(false);
-  const [showTutorial, setShowTutorial] = useState(true);
+  const [showTutorial, setShowTutorial] = useCookies(["showTutorial"]);
 
   const handleSetShowTutorial = (state: boolean) => {
-    setShowTutorial(state);
+    if (state === false) {
+      const currentDate = new Date();
+      const tenYears = new Date(currentDate.getFullYear() + 10, 1, 1);
+      setShowTutorial("showTutorial", "false", {
+        path: "/",
+        expires: tenYears,
+      });
+    } else {
+      setShowTutorial("showTutorial", "true", { path: "/" });
+    }
   };
 
   const handleSelectedNodeType = (type: NodeTrueType) => {
