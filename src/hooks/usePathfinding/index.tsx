@@ -37,11 +37,15 @@ const usePathfinding = (rows: number, columns: number) => {
     useState<NodeTrueType>("start");
   const [isMousePressed, setIsMousePressed] = useState(false);
   const [isAnimationProcessing, setIsAnimationProcessing] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(true);
+
+  const handleSetShowTutorial = (state: boolean) => {
+    setShowTutorial(state);
+  };
 
   const handleSelectedNodeType = (type: NodeTrueType) => {
     setSelectedNodeType(type);
   };
-
   const handleMouseUp = () => {
     setIsMousePressed(false);
   };
@@ -322,6 +326,8 @@ const usePathfinding = (rows: number, columns: number) => {
     handleClearNodesByType,
     handleGenerateMaze,
     isAnimationProcessing,
+    showTutorial,
+    handleSetShowTutorial,
   };
 };
 

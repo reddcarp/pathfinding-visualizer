@@ -1,5 +1,6 @@
 import Grid from "./components/grid";
 import Header from "./components/header";
+import Modal from "./components/modal";
 import StateSelector from "./components/stateSelector";
 import Toast from "./components/toast";
 import usePathfinding from "./hooks/usePathfinding";
@@ -18,16 +19,20 @@ function App() {
     handleClearNodesByType,
     handleGenerateMaze,
     isAnimationProcessing,
+    showTutorial,
+    handleSetShowTutorial,
   } = usePathfinding(23, 55);
 
   return (
     <div className="App">
       {isAnimationProcessing && <Toast message="Processing animation" />}
+      {showTutorial && <Modal handleSetShowTutorial={handleSetShowTutorial} />}
       <Header
         handleClearPath={handleClearPath}
         handlePathfindingVisualization={handlePathfindingVisualization}
         handleClearNodesByType={handleClearNodesByType}
         handleGenerateMaze={handleGenerateMaze}
+        handleSetShowTutorial={handleSetShowTutorial}
       />
       <StateSelector
         selectedNodeType={selectedNodeType}

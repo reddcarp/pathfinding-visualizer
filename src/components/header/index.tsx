@@ -7,6 +7,7 @@ interface HeaderProps {
   handleClearPath: () => void;
   handleClearNodesByType: (nodeTypes: NodeTrueType[]) => void;
   handleGenerateMaze: (algo: MazeType) => void;
+  handleSetShowTutorial: (state: boolean) => void;
 }
 
 interface HeaderState {}
@@ -51,7 +52,10 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           displayedName="Clear weights"
         />
         <div id="header-end">
-          <Action actionToPerform={() => null} displayedName="Help" />
+          <Action
+            actionToPerform={() => this.props.handleSetShowTutorial(true)}
+            displayedName="Help"
+          />
         </div>
       </div>
     );

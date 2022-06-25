@@ -15,6 +15,10 @@ body {
   --color-grid-border: #3a3a3c;
   --color-text: #fff;
 
+  /* Modal */
+  --color-modal-backdrop: #75737333;
+  --color-modal: #1b1b1c;
+
   /* Type Selector */
   --type-selector-height: 45px;
   --type-selector-width: 137px;
@@ -47,7 +51,66 @@ code {
     monospace;
 }
 
-/******* Grid *********/
+/******* Modal ********/
+#modal-backdrop {
+  z-index: 1;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-modal-backdrop);
+  align-items: center;
+  justify-content: center;
+}
+#modal {
+  border-radius: 10px;
+  background-color: var(--color-modal);
+  width: 437px;
+  height: 408px;
+  padding: 10px;
+}
+
+#sub-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+#sub-page-header {
+  align-self: flex-end;
+  flex-direction: row;
+}
+#sub-page-content {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+#sub-page-content > #title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 32px;
+}
+#sub-page-content > #text {
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+}
+#sub-page-footer {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#sub-page-action {
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--color-text);
+}
+#sub-page-action:hover {
+  color: var(--color-header-option-hover);
+}
+
+/******* Grid ********/
 #grid-container {
   padding: 0px 10px 10px 10px;
   flex: 1;
