@@ -37,7 +37,8 @@ function Tutorial(props: TutorialProps) {
           <div id="title">Pathfinding</div>
           <div id="text">
             This pathfinding visualizer is based on a 2D grid. <br />
-            Moving up, down,left or right has a cost of 1.
+            Moving up, down,left or right has a cost of 1. <br />A 90° turn has
+            an additional cost of 1.
           </div>
           <img style={{ marginTop: 50 }} src={p1Image} alt="pathfinding" />
         </SubPage>

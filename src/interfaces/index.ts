@@ -44,4 +44,5 @@ export type {
   PathfindingType,
   NodeTrueType,
   MazeType,
+  Direction,
 };

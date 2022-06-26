@@ -1,5 +1,10 @@
 import { copyNodes } from "../hooks/usePathfinding/helper";
-import { NodeStateType, NodeTrueType, NodeType } from "../interfaces";
+import {
+  Direction,
+  NodeStateType,
+  NodeTrueType,
+  NodeType,
+} from "../interfaces";
 
 const getAllNodes = (nodes: NodeType[][]) => {
   const unvisitedNodes: NodeType[] = [];
@@ -13,13 +18,69 @@ const getAllNodes = (nodes: NodeType[][]) => {
   return unvisitedNodes;
 };
 
+const getNodePositionRelativeToAnotherNode = (
+  referenceNode: NodeType,
+  node: NodeType
+) => {
+  const referenceCoord = referenceNode.coord;
+  const coord = node.coord;
+
+  if (coord.row > referenceCoord.row) return "down";
+  if (coord.row < referenceCoord.row) return "up";
+  if (coord.column > referenceCoord.column) return "right";
+  if (coord.column < referenceCoord.column) return "left";
+  return "right";
+};
+
+// turning 90° has a cost of 1
+const getNeighborRotationDistance = (
+  node: NodeType,
+  neighborRelativePosition: Direction
+) => {
+  const direction = node.direction;
+  // in front
+  if (direction === neighborRelativePosition) return 0;
+  if (direction === "up" || direction === "down") {
+    // 90° rotation
+    if (
+      neighborRelativePosition === "right" ||
+      neighborRelativePosition === "left"
+    ) {
+      return 1;
+    }
+    // 180° rotation
+    return 2;
+  }
+  if (direction === "right" || direction === "left") {
+    // 90° rotation
+    if (
+      neighborRelativePosition === "up" ||
+      neighborRelativePosition === "down"
+    ) {
+      return 1;
+    }
+    // 180° rotation
+    return 2;
+  }
+  return 0;
+};
+
 const updateUnvisitedNeighbors = (node: NodeType, nodes: NodeType[][]) => {
   const unvisitedNeighbors = getUnvisitedNeighbors(nodes, node);
   unvisitedNeighbors.forEach((neighbor) => {
-    let tempDistance = node.distance + neighbor.weight;
+    const neighborDirection: Direction = getNodePositionRelativeToAnotherNode(
+      node,
+      neighbor
+    );
+    // remove rotationDistance to remove cost of 90° rotations
+    let tempDistance =
+      node.distance +
+      neighbor.weight +
+      getNeighborRotationDistance(node, neighborDirection);
     if (tempDistance < neighbor.distance) {
       neighbor.distance = tempDistance;
       neighbor.previousNode = node;
+      neighbor.direction = neighborDirection;
     }
   });
 };
@@ -50,6 +111,7 @@ const dijkstra = (
   const visitedNodesInOrder: NodeType[] = [];
   const shortestPathNodesInOrder: NodeType[] = [];
   newNodes[startNode.coord.row][startNode.coord.column].distance = 0;
+  newNodes[startNode.coord.row][startNode.coord.column].direction = "right";
   const unvisitedNodes = getAllNodes(newNodes);
 
   while (unvisitedNodes.length > 0) {

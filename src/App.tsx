@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="App">
       {isAnimationProcessing && <Toast message="Processing animation" />}
-      {showTutorial.showTutorial != "false" && (
+      {showTutorial.showTutorial !== "false" && (
         <Modal handleSetShowTutorial={handleSetShowTutorial} />
       )}
       <Header
