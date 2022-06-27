@@ -133,6 +133,8 @@ const dijkstra = (
       closestNode.coord.row === goalNode.coord.row &&
       closestNode.coord.column === goalNode.coord.column
     ) {
+      // not setting it if it is the goal node
+      closestNode.direction = undefined;
       break;
     }
     updateUnvisitedNeighbors(closestNode, newNodes);
