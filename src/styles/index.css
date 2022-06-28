@@ -284,6 +284,7 @@ code {
   color: var(--color-header-option-hover);
 }
 #multi-action > #list {
+  z-index: 10;
   position: absolute;
   display: flex;
   flex-direction: column;
