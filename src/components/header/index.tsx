@@ -9,6 +9,7 @@ interface HeaderProps {
   handleClearNodesByType: (nodeTypes: NodeTrueType[]) => void;
   handleGenerateMaze: (algo: MazeType) => void;
   handleSetShowTutorial: (state: boolean) => void;
+  handleClearAll: () => void;
 }
 
 interface HeaderState {}
@@ -36,24 +37,22 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           }
           displayedName="Generate Maze"
         />
-        <Action
-          actionToPerform={() => this.props.handleClearPath()}
-          displayedName="Clear Path"
+        <MultiAction
+          name="Clear"
+          displayedNames={["Path", "Walls", "Weights", "All"]}
+          actionToPerform={[
+            () => this.props.handleClearPath(),
+            () => this.props.handleClearNodesByType(["wall"]),
+            () =>
+              this.props.handleClearNodesByType([
+                "weight-2",
+                "weight-5",
+                "weight-10",
+              ]),
+            () => this.props.handleClearAll(),
+          ]}
         />
-        <Action
-          actionToPerform={() => this.props.handleClearNodesByType(["wall"])}
-          displayedName="Clear walls"
-        />
-        <Action
-          actionToPerform={() =>
-            this.props.handleClearNodesByType([
-              "weight-2",
-              "weight-5",
-              "weight-10",
-            ])
-          }
-          displayedName="Clear weights"
-        />
+
         <div id="header-end">
           <Action
             actionToPerform={() => this.props.handleSetShowTutorial(true)}

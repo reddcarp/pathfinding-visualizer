@@ -343,6 +343,7 @@ const usePathfinding = (rows: number, columns: number) => {
     handleSelectedNodeType,
     selectedNodeType,
     handleClearPath,
+    handleClearAll,
     handlePathfindingVisualization,
     handleClearNodesByType,
     handleGenerateMaze,

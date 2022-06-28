@@ -15,6 +15,7 @@ function App() {
     handleSelectedNodeType,
     selectedNodeType,
     handleClearPath,
+    handleClearAll,
     handlePathfindingVisualization,
     handleClearNodesByType,
     handleGenerateMaze,
@@ -35,6 +36,7 @@ function App() {
         handleClearNodesByType={handleClearNodesByType}
         handleGenerateMaze={handleGenerateMaze}
         handleSetShowTutorial={handleSetShowTutorial}
+        handleClearAll={handleClearAll}
       />
       <StateSelector
         selectedNodeType={selectedNodeType}
