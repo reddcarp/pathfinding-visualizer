@@ -32,6 +32,7 @@ interface NodeType {
   direction?: Direction;
   type: NodeTrueType;
   weight: number;
+  hvalue?: number;
 }
 
 type PathfindingType = "BFS" | "Dijkstra" | "A*" | "DFS";

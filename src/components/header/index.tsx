@@ -29,6 +29,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         />
         <Action
           actionToPerform={() =>
+            this.props.handlePathfindingVisualization("A*")
+          }
+          displayedName="Visualize A*"
+        />
+        <Action
+          actionToPerform={() =>
             this.props.handleGenerateMaze("Recursive-division")
           }
           displayedName="Generate Maze"

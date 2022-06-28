@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { dijkstra } from "../../algorithms/dijkstra";
+import { aStar } from "../../algorithms/pathfinding/aStar";
+import { dijkstra } from "../../algorithms/pathfinding/dijkstra";
 import { recursiveMazeGeneration } from "../../algorithms/maze";
 import {
   CoordType,
@@ -126,17 +127,18 @@ const usePathfinding = (rows: number, columns: number) => {
     });
   };
 
-  const animateDijkstra = (
+  const animatePathfinding = (
     visitedNodesInOrder: NodeType[],
     shortestPathNodesInOrder: NodeType[]
   ) => {
     // time during which the looking state is displayed
-    let lookingTime = 5;
+    let lookingTime = 10;
     // time between visited nodes' animation
-    let animationTimeBetween = 5;
+    let animationTimeBetween = 10;
     // time between shortest path nodes' animation
-    let shortestPathAnimationTimeBetween = 50;
+    let shortestPathAnimationTimeBetween = 25;
 
+    // search animation
     visitedNodesInOrder.forEach((node, idx) => {
       setTimeout(() => {
         setNodes((prev) => {
@@ -256,14 +258,23 @@ const usePathfinding = (rows: number, columns: number) => {
   const launchAppropriateVisualization = (algo: PathfindingType) => {
     setTimeout(() => {
       setIsAnimationProcessing(true);
+      let visitedNodesInOrder, shortestPathNodesInOrder;
       switch (algo) {
         case "Dijkstra":
-          const [visitedNodesInOrder, shortestPathNodesInOrder] = dijkstra(
+          [visitedNodesInOrder, shortestPathNodesInOrder] = dijkstra(
             nodes,
             startNode,
             goalNode
           );
-          animateDijkstra(visitedNodesInOrder, shortestPathNodesInOrder);
+          animatePathfinding(visitedNodesInOrder, shortestPathNodesInOrder);
+          break;
+        case "A*":
+          [visitedNodesInOrder, shortestPathNodesInOrder] = aStar(
+            nodes,
+            startNode,
+            goalNode
+          );
+          animatePathfinding(visitedNodesInOrder, shortestPathNodesInOrder);
           break;
         default:
           break;

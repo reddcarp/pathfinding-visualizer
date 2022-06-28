@@ -1,10 +1,11 @@
-import { copyNodes } from "../hooks/usePathfinding/helper";
+// using the manhattan heuristic since we can only move
+import { copyNodes } from "../../hooks/usePathfinding/helper";
 import {
   Direction,
   NodeStateType,
   NodeTrueType,
   NodeType,
-} from "../interfaces";
+} from "../../interfaces";
 
 const getAllNodes = (nodes: NodeType[][]) => {
   const unvisitedNodes: NodeType[] = [];
@@ -65,7 +66,22 @@ const getNeighborRotationDistance = (
   return 0;
 };
 
-const updateUnvisitedNeighbors = (node: NodeType, nodes: NodeType[][]) => {
+// using the manhattan heuristic since we can only move
+// up, down, left and right
+const manhattanDistance = (node: NodeType, goalNode: NodeType) => {
+  const h =
+    Math.abs(node.coord.row - goalNode.coord.row) +
+    Math.abs(node.coord.column - goalNode.coord.column);
+
+  return h;
+};
+
+const updateUnvisitedNeighbors = (
+  node: NodeType,
+  nodes: NodeType[][],
+  goalNode: NodeType,
+  heuristic: (node: NodeType, goalNode: NodeType) => any
+) => {
   const unvisitedNeighbors = getUnvisitedNeighbors(nodes, node);
   unvisitedNeighbors.forEach((neighbor) => {
     const neighborDirection: Direction = getNodePositionRelativeToAnotherNode(
@@ -81,6 +97,7 @@ const updateUnvisitedNeighbors = (node: NodeType, nodes: NodeType[][]) => {
       neighbor.distance = tempDistance;
       neighbor.previousNode = node;
       neighbor.direction = neighborDirection;
+      neighbor.hvalue = heuristic(neighbor, goalNode);
     }
   });
 };
@@ -99,13 +116,25 @@ const getUnvisitedNeighbors = (nodes: NodeType[][], node: NodeType) => {
 };
 
 const sortNodesByDistance = (unvisitedNodes: NodeType[]) => {
-  unvisitedNodes.sort((a, b) => a.distance - b.distance);
+  unvisitedNodes.sort((a, b) => {
+    if (a.hvalue === 0) return -1;
+    if (b.hvalue === 0) return 1;
+    return a.distance - b.distance;
+  });
 };
 
-const dijkstra = (
+const sortByHvalue = (unvisitedNodes: NodeType[]) => {
+  unvisitedNodes.sort((a, b) => {
+    if (!a.hvalue || !b.hvalue) return 0;
+    return a.hvalue - b.hvalue;
+  });
+};
+
+const _astar = (
   nodes: NodeType[][],
   startNode: NodeType,
-  goalNode: NodeType
+  goalNode: NodeType,
+  heuristic: (node: NodeType, goalNode: NodeType) => any
 ) => {
   const newNodes = copyNodes(nodes);
   const visitedNodesInOrder: NodeType[] = [];
@@ -116,6 +145,7 @@ const dijkstra = (
 
   while (unvisitedNodes.length > 0) {
     sortNodesByDistance(unvisitedNodes);
+    sortByHvalue(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
     if (!closestNode) break;
 
@@ -137,7 +167,7 @@ const dijkstra = (
       closestNode.direction = undefined;
       break;
     }
-    updateUnvisitedNeighbors(closestNode, newNodes);
+    updateUnvisitedNeighbors(closestNode, newNodes, goalNode, heuristic);
   }
 
   // creating the shortestPath array in order
@@ -167,6 +197,14 @@ const dijkstra = (
   return [visitedNodesInOrder, shortestPathNodesInOrder];
 };
 
+const aStar = (
+  nodes: NodeType[][],
+  startNode: NodeType,
+  goalNode: NodeType
+) => {
+  return _astar(nodes, startNode, goalNode, manhattanDistance);
+};
+
 const getShortestPathState = (type: NodeTrueType): NodeStateType => {
   switch (type) {
     case "goal":
@@ -191,4 +229,4 @@ const getDirection = (from: NodeType, to: NodeType) => {
   return "up";
 };
 
-export { dijkstra };
+export { aStar, _astar };
