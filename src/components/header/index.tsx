@@ -1,6 +1,7 @@
 import React from "react";
 import { MazeType, NodeTrueType, PathfindingType } from "../../interfaces";
 import Action from "./Action";
+import MultiAction from "./MultiAction";
 
 interface HeaderProps {
   handlePathfindingVisualization: (algo: PathfindingType) => void;
@@ -21,17 +22,13 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     return (
       <div id="header">
         <b id="header-title">Pathfinding visualizer</b>
-        <Action
-          actionToPerform={() =>
-            this.props.handlePathfindingVisualization("Dijkstra")
-          }
-          displayedName="Visualize Dijkstra"
-        />
-        <Action
-          actionToPerform={() =>
-            this.props.handlePathfindingVisualization("A*")
-          }
-          displayedName="Visualize A*"
+        <MultiAction
+          name="Visualize"
+          displayedNames={["Dijkstra", "A*"]}
+          actionToPerform={[
+            () => this.props.handlePathfindingVisualization("Dijkstra"),
+            () => this.props.handlePathfindingVisualization("A*"),
+          ]}
         />
         <Action
           actionToPerform={() =>

@@ -271,6 +271,33 @@ code {
   color: var(--color-header-option-hover);
 }
 
+#multi-action {
+  cursor: pointer;
+  color: var(--color-header-option);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+  font-size: 15px;
+}
+#multi-action:hover {
+  color: var(--color-header-option-hover);
+}
+#multi-action > #list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+}
+#list-item {
+  color: var(--color-header-option);
+  background-color: #20232a;
+  padding: 10px;
+}
+#list-item:hover {
+  color: var(--color-header-option-hover);
+}
+
 /******* State Selector *********/
 #state-selector-container {
   display: flex;

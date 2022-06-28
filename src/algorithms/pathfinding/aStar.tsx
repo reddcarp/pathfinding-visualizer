@@ -1,4 +1,3 @@
-// using the manhattan heuristic since we can only move
 import { copyNodes } from "../../hooks/usePathfinding/helper";
 import {
   Direction,
