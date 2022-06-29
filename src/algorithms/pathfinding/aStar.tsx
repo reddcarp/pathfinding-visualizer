@@ -114,18 +114,19 @@ const getUnvisitedNeighbors = (nodes: NodeType[][], node: NodeType) => {
   return neighbors.filter((node) => node.state !== "visited");
 };
 
-const sortNodesByDistance = (unvisitedNodes: NodeType[]) => {
+const sortNodesByClosest = (unvisitedNodes: NodeType[]) => {
   unvisitedNodes.sort((a, b) => {
+    // used to put the goal node at the beginning
     if (a.hvalue === 0) return -1;
     if (b.hvalue === 0) return 1;
-    return a.distance - b.distance;
-  });
-};
 
-const sortByHvalue = (unvisitedNodes: NodeType[]) => {
-  unvisitedNodes.sort((a, b) => {
-    if (!a.hvalue || !b.hvalue) return 0;
-    return a.hvalue - b.hvalue;
+    // case without a heuristic
+    if (!a.hvalue || !b.hvalue) return a.distance - b.distance;
+
+    if (a.distance + a.hvalue === b.distance + b.hvalue) {
+      return a.hvalue - b.hvalue;
+    }
+    return a.hvalue + a.weight - (b.hvalue + b.weight);
   });
 };
 
@@ -143,8 +144,7 @@ const _astar = (
   const unvisitedNodes = getAllNodes(newNodes);
 
   while (unvisitedNodes.length > 0) {
-    sortNodesByDistance(unvisitedNodes);
-    sortByHvalue(unvisitedNodes);
+    sortNodesByClosest(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
     if (!closestNode) break;
 
