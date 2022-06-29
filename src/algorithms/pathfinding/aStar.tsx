@@ -123,9 +123,10 @@ const sortNodesByClosest = (unvisitedNodes: NodeType[]) => {
     // case without a heuristic
     if (!a.hvalue || !b.hvalue) return a.distance - b.distance;
 
-    if (a.distance + a.hvalue === b.distance + b.hvalue) {
-      return a.hvalue - b.hvalue;
+    if (a.hvalue + a.weight === b.hvalue + b.weight) {
+      return a.distance - b.distance;
     }
+
     return a.hvalue + a.weight - (b.hvalue + b.weight);
   });
 };
