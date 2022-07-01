@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { aStar } from "../../algorithms/pathfinding/aStar";
 import { dijkstra } from "../../algorithms/pathfinding/dijkstra";
@@ -10,30 +10,54 @@ import {
   NodeType,
   PathfindingType,
 } from "../../interfaces";
+import { useGridData } from "./useGridData";
 import { constructNodesArray } from "./helper";
 
-const usePathfinding = (rows: number, columns: number) => {
-  const INITIAL_NODES_ROW = Math.floor(rows / 2);
-  const INITIAL_START_NODE_COLUMN = Math.floor(columns / 5);
-  const INITIAL_GOAL_NODE_COLUMN = Math.floor(
-    columns - INITIAL_START_NODE_COLUMN - 1
-  );
+const usePathfinding = () => {
+  const { initialNodes, rows, columns } = useGridData();
 
   const [startNode, setStartNode] = useState<NodeType>({
-    coord: { row: INITIAL_NODES_ROW, column: INITIAL_START_NODE_COLUMN },
+    coord: { row: Math.floor(rows / 2), column: Math.floor(columns / 5) },
     distance: Infinity,
     type: "start",
     weight: 1,
   });
   const [goalNode, setGoalNode] = useState<NodeType>({
-    coord: { row: INITIAL_NODES_ROW, column: INITIAL_GOAL_NODE_COLUMN },
+    coord: { row: Math.floor(rows / 2), column: Math.floor(columns * (4 / 5)) },
     distance: Infinity,
     type: "goal",
     weight: 1,
   });
-  const [nodes, setNodes] = useState<NodeType[][]>(
-    constructNodesArray(rows, columns, startNode, goalNode)
-  );
+  const [nodes, setNodes] = useState<NodeType[][]>(initialNodes);
+
+  useEffect(() => {
+    const newStartNode: NodeType = {
+      coord: { row: Math.floor(rows / 2), column: Math.floor(columns / 5) },
+      distance: Infinity,
+      type: "start",
+      weight: 1,
+    };
+    setStartNode(() => newStartNode);
+
+    const newGoalNode: NodeType = {
+      coord: {
+        row: Math.floor(rows / 2),
+        column: Math.floor(columns * (4 / 5)),
+      },
+      distance: Infinity,
+      type: "goal",
+      weight: 1,
+    };
+    setGoalNode(() => newGoalNode);
+
+    setNodes(() => {
+      const newNodes = constructNodesArray(rows, columns);
+      newNodes[newStartNode.coord.row][newStartNode.coord.column].type =
+        "start";
+      newNodes[newGoalNode.coord.row][newGoalNode.coord.column].type = "goal";
+      return newNodes;
+    });
+  }, [rows, columns]);
 
   const [selectedNodeType, setSelectedNodeType] =
     useState<NodeTrueType>("start");

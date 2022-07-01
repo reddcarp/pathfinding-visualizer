@@ -22,7 +22,7 @@ function App() {
     isAnimationProcessing,
     showTutorial,
     handleSetShowTutorial,
-  } = usePathfinding(23, 55);
+  } = usePathfinding();
 
   return (
     <div className="App">
