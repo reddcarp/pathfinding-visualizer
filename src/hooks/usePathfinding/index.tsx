@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { aStar } from "../../algorithms/pathfinding/aStar";
 import { dijkstra } from "../../algorithms/pathfinding/dijkstra";
-import { recursiveMazeGeneration } from "../../algorithms/maze";
+import { recursiveMazeGeneration } from "../../algorithms/maze/recursiveDivision";
 import {
   CoordType,
   MazeType,
