@@ -36,7 +36,7 @@ interface NodeType {
 }
 
 type PathfindingType = "BFS" | "Dijkstra" | "A*" | "DFS";
-type MazeType = "Recursive-division";
+type MazeType = "Recursive-division" | "Depth-first";
 
 export type {
   NodeStateType,

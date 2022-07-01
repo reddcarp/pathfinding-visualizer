@@ -12,6 +12,7 @@ import {
 } from "../../interfaces";
 import { useGridData } from "./useGridData";
 import { constructNodesArray } from "./helper";
+import { depthFirstMazeGeneration } from "../../algorithms/maze/depthFirst";
 
 const usePathfinding = () => {
   const { initialNodes, rows, columns } = useGridData();
@@ -310,8 +311,72 @@ const usePathfinding = () => {
     handleClearPath(launchAppropriateVisualization(algo));
   };
 
-  const visualizeMazeGeneration = (mazeWallsInOrder: CoordType[]) => {
-    handleClearAll(() => {
+  const nodeArrayAllWalls = (callback?: any) => {
+    setNodes((prev) => {
+      let newNodes = [...prev];
+
+      for (let row = 0; row < prev.length; row++) {
+        for (let col = 0; col < prev[0].length; col++) {
+          if (
+            prev[row][col].type === "goal" ||
+            prev[row][col].type === "start"
+          ) {
+            newNodes[row][col] = {
+              coord: { row: row, column: col },
+              distance: prev[row][col].distance,
+              type: prev[row][col].type,
+              weight: 1,
+            };
+          } else {
+            newNodes[row][col] = {
+              coord: { row: row, column: col },
+              distance: Infinity,
+              type: "wall",
+              weight: 1,
+            };
+          }
+        }
+      }
+
+      if (callback) callback();
+      return newNodes;
+    });
+  };
+  const visualizeMazeGeneration = (
+    mazeWallsInOrder: CoordType[],
+    type: NodeTrueType,
+    shouldClear?: boolean
+  ) => {
+    if (shouldClear) {
+      handleClearAll(() => {
+        setIsAnimationProcessing(true);
+        const timeBetweenWalls = 10;
+
+        mazeWallsInOrder.forEach((coord, idx) => {
+          setTimeout(() => {
+            setNodes((prev) => {
+              let newNodes = [...prev];
+              newNodes[coord.row][coord.column] = {
+                coord: {
+                  column: coord.column,
+                  row: coord.row,
+                },
+                distance: Infinity,
+                type: type,
+                weight: 1,
+              };
+              return newNodes;
+            });
+          }, timeBetweenWalls * idx);
+        });
+
+        // animation done
+        setTimeout(
+          () => setIsAnimationProcessing(false),
+          timeBetweenWalls * mazeWallsInOrder.length
+        );
+      });
+    } else {
       setIsAnimationProcessing(true);
       const timeBetweenWalls = 10;
 
@@ -325,7 +390,7 @@ const usePathfinding = () => {
                 row: coord.row,
               },
               distance: Infinity,
-              type: "wall",
+              type: type,
               weight: 1,
             };
             return newNodes;
@@ -338,7 +403,7 @@ const usePathfinding = () => {
         () => setIsAnimationProcessing(false),
         timeBetweenWalls * mazeWallsInOrder.length
       );
-    });
+    }
   };
   const launchMazeVisualization = (algo: MazeType) => {
     switch (algo) {
@@ -348,7 +413,20 @@ const usePathfinding = () => {
           startNode,
           goalNode
         );
-        visualizeMazeGeneration(mazeWallsInOrder);
+        visualizeMazeGeneration(mazeWallsInOrder, "wall", true);
+        break;
+      case "Depth-first":
+        const mazePathsInOrder = depthFirstMazeGeneration(
+          nodes,
+          startNode,
+          goalNode
+        );
+        nodeArrayAllWalls(() =>
+          setTimeout(
+            () => visualizeMazeGeneration(mazePathsInOrder, "open"),
+            1000
+          )
+        );
         break;
       default:
         break;
