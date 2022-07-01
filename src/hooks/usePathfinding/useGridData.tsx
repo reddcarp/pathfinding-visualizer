@@ -1,12 +1,12 @@
 import { useMemo } from "react";
-import useWindowSize from "../useWindowSize";
+import useGridSize from "../useGridSize";
 import { constructNodesArray } from "./helper";
 
 const NODE_SIZE = 20;
 const GAP = 2.5;
 
 export const useGridData = () => {
-  const { width, height } = useWindowSize();
+  const { width, height } = useGridSize();
 
   const rows = useMemo(() => Math.floor(height / (NODE_SIZE + GAP)), [height]);
   const columns = useMemo(() => Math.floor(width / (NODE_SIZE + GAP)), [width]);

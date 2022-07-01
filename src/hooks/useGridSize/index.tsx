@@ -8,7 +8,7 @@ interface windowSizeType {
   height: number | undefined;
 }
 
-export default function useWindowSize() {
+export default function useGridSize() {
   const getGridHeight = () => {
     const windowHeight = window.innerHeight;
     let headerHeight = document.getElementById("header")?.offsetHeight;
@@ -21,7 +21,7 @@ export default function useWindowSize() {
     return windowHeight - headerHeight - stateSelectorHeight;
   };
 
-  const [windowSize, setWindowSize] = useState<windowSizeType>({
+  const [gridSize, setGridSize] = useState<windowSizeType>({
     width: document.getElementById("grid-container")?.offsetWidth,
     height: getGridHeight(),
   });
@@ -35,7 +35,7 @@ export default function useWindowSize() {
       }
 
       _timeout = setTimeout(() => {
-        setWindowSize({
+        setGridSize({
           width: document.getElementById("grid-container")?.offsetWidth,
           height: getGridHeight(),
         });
@@ -44,7 +44,7 @@ export default function useWindowSize() {
 
     window.addEventListener("resize", handleResize);
 
-    setWindowSize({
+    setGridSize({
       width: document.getElementById("grid-container")?.offsetWidth,
       height: getGridHeight(),
     });
@@ -53,7 +53,7 @@ export default function useWindowSize() {
   }, []);
 
   return {
-    width: Math.min(windowSize.width ? windowSize.width : 50, MAX_WIDTH),
-    height: Math.min(windowSize.height ? windowSize.height : 25, MAX_HEIGHT),
+    width: Math.min(gridSize.width ? gridSize.width : 50, MAX_WIDTH),
+    height: Math.min(gridSize.height ? gridSize.height : 25, MAX_HEIGHT),
   };
 }
