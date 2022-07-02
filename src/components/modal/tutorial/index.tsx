@@ -113,10 +113,10 @@ function Tutorial(props: TutorialProps) {
           rightFooterButtonText="Next"
           rightFooterButtonAction={nextAction}
         >
-          <div id="title">Additional commands</div>
+          <div id="title">Clear commands</div>
           <div id="text">
-            To use an additionnal command, click on the desired option in the
-            header.
+            To clear a particular type of node, hover the clear option and click
+            on the desired option in the list.
           </div>
           <img
             style={{ marginTop: 77 }}
