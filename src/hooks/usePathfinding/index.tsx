@@ -424,7 +424,7 @@ const usePathfinding = () => {
         nodeArrayAllWalls(() =>
           setTimeout(
             () => visualizeMazeGeneration(mazePathsInOrder, "open"),
-            1000
+            700
           )
         );
         break;

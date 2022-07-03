@@ -70,9 +70,10 @@ code {
 #modal {
   border-radius: 10px;
   background-color: var(--color-modal);
-  width: 437px;
-  height: 408px;
+  width: 90vw;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 #sub-page {

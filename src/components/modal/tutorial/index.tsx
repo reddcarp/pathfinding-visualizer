@@ -40,7 +40,11 @@ function Tutorial(props: TutorialProps) {
             Moving up, down,left or right has a cost of 1. <br />A 90° turn has
             an additional cost of 1.
           </div>
-          <img style={{ marginTop: 50 }} src={p1Image} alt="pathfinding" />
+          <img
+            style={{ marginTop: 20, marginBottom: 20 }}
+            src={p1Image}
+            alt="pathfinding"
+          />
         </SubPage>
       )}
       {pageIdx === 1 && (
@@ -57,7 +61,7 @@ function Tutorial(props: TutorialProps) {
             grid.
           </div>
           <img
-            style={{ marginTop: 10 }}
+            style={{ marginTop: 10, width: "100%" }}
             src={p2Image}
             alt="node type selection"
           />
@@ -65,7 +69,11 @@ function Tutorial(props: TutorialProps) {
             With the weight node selected, clicking on it again will change the
             node's weight (as displayed on it)
           </div>
-          <img style={{ marginTop: 13 }} src={p2Gif} alt="weight selection" />
+          <img
+            style={{ marginTop: 13, marginBottom: 20, height: "30%" }}
+            src={p2Gif}
+            alt="weight selection"
+          />
         </SubPage>
       )}
       {pageIdx === 2 && (
@@ -81,7 +89,11 @@ function Tutorial(props: TutorialProps) {
             Once a node type selected, click on the grid to place it <br />
             or click and drag to place multiple nodes.
           </div>
-          <img style={{ marginTop: 10 }} src={p3Gif} alt="wall placement" />
+          <img
+            style={{ marginTop: 10, marginBottom: 20, width: "100%" }}
+            src={p3Gif}
+            alt="wall placement"
+          />
         </SubPage>
       )}
       {pageIdx === 3 && (
@@ -99,7 +111,7 @@ function Tutorial(props: TutorialProps) {
             the animation will then start.
           </div>
           <img
-            style={{ marginTop: 70 }}
+            style={{ marginTop: 20, marginBottom: 20, width: "100%" }}
             src={p4Image}
             alt="visualization options"
           />
@@ -119,7 +131,7 @@ function Tutorial(props: TutorialProps) {
             on the desired option in the list.
           </div>
           <img
-            style={{ marginTop: 77 }}
+            style={{ marginTop: 20, marginBottom: 20 }}
             src={p5Image}
             alt="aditionnal options"
           />
@@ -137,7 +149,11 @@ function Tutorial(props: TutorialProps) {
           <div id="text">
             To rewatch this tutorial you can click on the help option.
           </div>
-          <img style={{ marginTop: 77 }} src={p6Image} alt="Help options" />
+          <img
+            style={{ marginTop: 20, marginBottom: 20 }}
+            src={p6Image}
+            alt="Help options"
+          />
         </SubPage>
       )}
     </>
