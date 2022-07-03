@@ -10,7 +10,8 @@ interface windowSizeType {
 
 export default function useGridSize() {
   const getGridHeight = () => {
-    const windowHeight = window.innerHeight;
+    let trueWindowHeight = document.getElementById("root")?.offsetHeight;
+    trueWindowHeight ??= 0;
     let headerHeight = document.getElementById("header")?.offsetHeight;
     headerHeight ??= 0;
     let stateSelectorHeight = document.getElementById(
@@ -18,7 +19,7 @@ export default function useGridSize() {
     )?.offsetHeight;
     stateSelectorHeight ??= 0;
 
-    return windowHeight - headerHeight - stateSelectorHeight;
+    return trueWindowHeight - headerHeight - stateSelectorHeight;
   };
 
   const [gridSize, setGridSize] = useState<windowSizeType>({
