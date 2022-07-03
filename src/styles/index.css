@@ -262,7 +262,7 @@ code {
   font-size: 20px;
   margin-right: 50px;
 }
-#multi-action {
+#action {
   cursor: pointer;
   color: var(--color-header-option);
   font-style: normal;
