@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/pathfinding-visualizer/static/css/main.600caffa.css",
-    "main.js": "/pathfinding-visualizer/static/js/main.de02ea86.js",
+    "main.css": "/pathfinding-visualizer/static/css/main.2fdc48f1.css",
+    "main.js": "/pathfinding-visualizer/static/js/main.51f30cd8.js",
     "static/js/787.ef103b65.chunk.js": "/pathfinding-visualizer/static/js/787.ef103b65.chunk.js",
     "static/media/WallPlacement.gif": "/pathfinding-visualizer/static/media/WallPlacement.d0b67bfe60069ad5e9f2.gif",
     "static/media/WeightChange.gif": "/pathfinding-visualizer/static/media/WeightChange.8e276188a8836056681c.gif",
@@ -16,12 +16,12 @@
     "static/media/target.svg": "/pathfinding-visualizer/static/media/target.2011b0837060414de747b16ad8b56b27.svg",
     "static/media/eraser.svg": "/pathfinding-visualizer/static/media/eraser.f9a15649dec2c26b90ed97091ffb1b87.svg",
     "static/media/wall.svg": "/pathfinding-visualizer/static/media/wall.ad71a65e4de86dbed0b563a7014851d9.svg",
-    "main.600caffa.css.map": "/pathfinding-visualizer/static/css/main.600caffa.css.map",
-    "main.de02ea86.js.map": "/pathfinding-visualizer/static/js/main.de02ea86.js.map",
+    "main.2fdc48f1.css.map": "/pathfinding-visualizer/static/css/main.2fdc48f1.css.map",
+    "main.51f30cd8.js.map": "/pathfinding-visualizer/static/js/main.51f30cd8.js.map",
     "787.ef103b65.chunk.js.map": "/pathfinding-visualizer/static/js/787.ef103b65.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.600caffa.css",
-    "static/js/main.de02ea86.js"
+    "static/css/main.2fdc48f1.css",
+    "static/js/main.51f30cd8.js"
   ]
 }
