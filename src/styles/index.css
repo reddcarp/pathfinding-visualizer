@@ -161,17 +161,17 @@ code {
 #node[node-type="weight-2"] {
   background: url("../images/weight-2.svg") center no-repeat;
   background-size: contain;
-  animation: plop 0.9s ease-out forwards alternate;
+  animation: plop 0.4s ease-out forwards alternate;
 }
 #node[node-type="weight-5"] {
   background: url("../images/weight-5.svg") center no-repeat;
   background-size: contain;
-  animation: plop 0.9s ease-out forwards alternate;
+  animation: plop 0.4s ease-out forwards alternate;
 }
 #node[node-type="weight-10"] {
   background: url("../images/weight-10.svg") center no-repeat;
   background-size: contain;
-  animation: plop 0.9s ease-out forwards alternate;
+  animation: plop 0.4s ease-out forwards alternate;
 }
 
 #node[state-type="looking"] {
@@ -262,8 +262,7 @@ code {
   font-size: 20px;
   margin-right: 50px;
 }
-
-#action {
+#multi-action {
   cursor: pointer;
   color: var(--color-header-option);
   font-style: normal;
@@ -275,7 +274,6 @@ code {
 #action:hover {
   color: var(--color-header-option-hover);
 }
-
 #multi-action {
   cursor: pointer;
   color: var(--color-header-option);
@@ -285,6 +283,20 @@ code {
   text-align: center;
   font-size: 15px;
 }
+
+@media screen and (max-width: 593px) {
+  #action {
+    font-size: 2.5vw;
+  }
+  #multi-action {
+    font-size: 2.5vw;
+  }
+  #header-title {
+    font-size: 2.6vw;
+    margin-right: 10px;
+  }
+}
+
 #multi-action:hover {
   color: var(--color-header-option-hover);
 }
@@ -325,7 +337,30 @@ code {
   width: var(--type-selector-width);
   gap: 5px;
   border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
+
+@media screen and (max-width: 693px) {
+  #state-toggle {
+    font-size: 2.2vw;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #state-toggle {
+    font-size: 1.8vw;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  #state-toggle {
+    font-size: 1.9vw;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+}
+
 #state-toggle:hover {
   background-color: var(--color-type-selector-unselected-hover);
 }
